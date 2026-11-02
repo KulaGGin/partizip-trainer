@@ -23,8 +23,8 @@ fahren; ist gefahren; to go (by vehicle)
 
 On this site, custom lists are stored in your browser only.
 
-## Translations
+## Languages
 
-The built-in verbs are translated into 21 languages: English, Chinese, Hindi, Spanish, Arabic, French, Bengali, Portuguese, Russian, Indonesian, Urdu, Japanese, Turkish, Vietnamese, Korean, Persian, Swahili, Tagalog, Italian, Polish and Ukrainian. Corrections from native speakers are welcome.
+The interface and the built-in verb translations are available in 22 languages: German, English, Chinese, Hindi, Spanish, Arabic, French, Bengali, Portuguese, Russian, Indonesian, Urdu, Japanese, Turkish, Vietnamese, Korean, Persian, Swahili, Tagalog, Italian, Polish and Ukrainian (Arabic, Persian and Urdu right to left). The site picks your browser language; change it with the Language picker. In German the verb translations are hidden. Corrections from native speakers are welcome.
 
 Everything is a single static `index.html`, with no build step.
