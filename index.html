@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+<title>Partizip II Trainer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one exercise sheet on squared school paper (Kästchenpapier); ink-blue writing, red correction pen, mastery grid underneath. */
+:root {
+  --paper: #f6f8fb;
+  --grid: #dde5f0;
+  --sheet: #ffffff;
+  --ink: #1b2a4a;
+  --muted: #5d6b86;
+  --blue: #2346b8;
+  --blue-soft: #e4eafb;
+  --red: #c42a2a;
+  --red-soft: #fbe6e4;
+  --green: #1d7a4a;
+  --green-soft: #e1f3e8;
+  --line: #cfd8e6;
+  --l0: #e9edf4; --l1: #cdd9f5; --l2: #9fb5ec; --l3: #5f82dc; --l4: #2346b8;
+  --l-fg-dark: #ffffff;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121a2b; --grid: #1b2640; --sheet: #18223a; --ink: #e6ebf5; --muted: #98a5c0;
+    --blue: #8ea8ff; --blue-soft: #243358; --red: #ff8a80; --red-soft: #3d2228;
+    --green: #6fd39b; --green-soft: #1d3a2d; --line: #2c3a5a;
+    --l0: #222d47; --l1: #2c3f73; --l2: #3d58a3; --l3: #5f7fd6; --l4: #8ea8ff; --l-fg-dark: #0f1626;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121a2b; --grid: #1b2640; --sheet: #18223a; --ink: #e6ebf5; --muted: #98a5c0;
+  --blue: #8ea8ff; --blue-soft: #243358; --red: #ff8a80; --red-soft: #3d2228;
+  --green: #6fd39b; --green-soft: #1d3a2d; --line: #2c3a5a;
+  --l0: #222d47; --l1: #2c3f73; --l2: #3d58a3; --l3: #5f7fd6; --l4: #8ea8ff; --l-fg-dark: #0f1626;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding-block: 28px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: 20px;
+}
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px; }
+h1 {
+  font-family: var(--display); font-weight: 800; font-size: clamp(28px, 6vw, 40px);
+  line-height: 1; margin: 0; letter-spacing: -0.02em; text-wrap: balance;
+}
+h1 span { color: var(--blue); }
+.sub { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.stats { display: flex; gap: 16px; font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.stats b { color: var(--ink); font-weight: 600; }
+
+.listbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.listbar label { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+#lang-select { flex: 0 1 180px; }
+#list-select, #lang-select {
+  flex: 1 1 220px; min-width: 0; font: 700 15px var(--body); color: var(--ink);
+  background: var(--sheet); border: 1.5px solid var(--line); border-radius: 10px; padding: 8px 10px;
+}
+.sync { font-size: 13px; color: var(--muted); flex-basis: 100%; }
+.sync:empty { display: none; }
+
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.tab {
+  font: 700 15px var(--body); color: var(--ink); background: var(--sheet);
+  border: 1.5px solid var(--line); border-radius: 999px; padding: 8px 16px; cursor: pointer;
+}
+.tab:hover { border-color: var(--blue); }
+.tab[aria-selected="true"] { background: var(--blue); border-color: var(--blue); color: var(--sheet); }
+.tab:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+.sheet {
+  background: var(--sheet); border: 1.5px solid var(--line); border-radius: 14px;
+  padding: 28px clamp(18px, 5vw, 40px) 24px; display: grid; gap: 18px; min-height: 340px;
+  position: relative;
+}
+.prompt-label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.verb { font-family: var(--display); font-weight: 700; font-size: clamp(40px, 11vw, 64px); line-height: 1; letter-spacing: -0.02em; margin: 4px 0 0; overflow-wrap: anywhere; }
+.trans { color: var(--muted); font-size: 17px; margin-top: 6px; }
+.extra { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+
+.answer-row { display: flex; gap: 8px; flex-wrap: wrap; }
+#answer {
+  flex: 1 1 240px; min-width: 0; font: 600 22px var(--mono); color: var(--blue);
+  background: var(--paper); border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px;
+}
+#answer::placeholder { color: var(--muted); opacity: .6; font-weight: 400; }
+.btn {
+  font: 700 16px var(--body); border-radius: 10px; padding: 12px 18px; cursor: pointer;
+  border: 1.5px solid var(--blue); background: var(--blue); color: var(--sheet);
+}
+.btn.ghost { background: transparent; color: var(--blue); }
+.btn.small { font-size: 14px; padding: 8px 12px; }
+.btn:disabled { opacity: .5; cursor: default; }
+
+.choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.aux-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.choice {
+  font: 600 19px var(--mono); color: var(--ink); text-align: left;
+  background: var(--paper); border: 1.5px solid var(--line); border-radius: 10px;
+  padding: 14px 14px; cursor: pointer; display: flex; gap: 10px; align-items: baseline; min-width: 0;
+  overflow-wrap: anywhere;
+}
+.choice .k { font-size: 12px; color: var(--muted); font-weight: 400; flex: none; }
+.choice:hover:not(:disabled) { border-color: var(--blue); }
+.choice:disabled { cursor: default; }
+.choice.right { background: var(--green-soft); border-color: var(--green); color: var(--green); }
+.choice.wrong { background: var(--red-soft); border-color: var(--red); color: var(--red); text-decoration: line-through; text-decoration-thickness: 2px; }
+.aux-choices .choice { justify-content: center; font-size: 26px; padding: 22px 14px; font-family: var(--display); font-weight: 700; }
+
+.feedback { min-height: 56px; border-radius: 10px; padding: 12px 14px; font-size: 16px; display: grid; gap: 2px; }
+.feedback:empty { background: transparent; padding: 0; }
+.feedback.ok { background: var(--green-soft); color: var(--green); }
+.feedback.bad { background: var(--red-soft); color: var(--red); }
+.feedback .sol { font: 600 20px var(--mono); color: var(--ink); }
+.feedback .sol .hit { color: var(--red); text-decoration: underline wavy; text-underline-offset: 4px; }
+.hint { font-size: 13px; color: var(--muted); }
+.hint kbd { font-family: var(--mono); font-size: 12px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: var(--paper); }
+
+/* List editor */
+.editor { align-content: start; }
+.field { display: grid; gap: 6px; font-size: 14px; color: var(--muted); }
+.field code { font-family: var(--mono); font-size: 13px; color: var(--ink); background: var(--blue-soft); padding: 1px 5px; border-radius: 4px; }
+#ed-name, #ed-text {
+  font: 400 16px var(--body); color: var(--ink); background: var(--paper);
+  border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 12px; width: 100%; min-width: 0;
+}
+#ed-name { font-weight: 700; }
+#ed-text { font-family: var(--mono); font-size: 15px; line-height: 1.6; resize: vertical; min-height: 220px; }
+.ed-check { font-size: 14px; display: grid; gap: 4px; }
+.ed-check .ok { color: var(--green); }
+.ed-check .err { color: var(--red); font-family: var(--mono); font-size: 13px; overflow-wrap: anywhere; }
+.ed-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ed-actions .spacer { flex: 1; }
+
+.empty { color: var(--muted); align-self: center; text-align: center; }
+
+section h2 { font-family: var(--display); font-weight: 700; font-size: 20px; margin: 0 0 4px; }
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.legend i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+.mastery { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 6px; }
+.chip {
+  font: 400 13px var(--mono); padding: 6px 8px; border-radius: 6px; background: var(--l0); color: var(--ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; justify-content: space-between; gap: 4px;
+}
+.chip[data-lvl="1"] { background: var(--l1); }
+.chip[data-lvl="2"] { background: var(--l2); }
+.chip[data-lvl="3"] { background: var(--l3); color: var(--l-fg-dark); }
+.chip[data-lvl="4"] { background: var(--l4); color: var(--l-fg-dark); }
+.chip .aux { opacity: .65; }
+.reset { margin-top: 10px; font: 400 13px var(--body); background: none; border: none; color: var(--muted); text-decoration: underline; cursor: pointer; padding: 0; }
+.confirm { font-size: 13px; color: var(--muted); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
+
+details { background: var(--sheet); border: 1.5px solid var(--line); border-radius: 14px; padding: 14px 18px; }
+summary { cursor: pointer; font-family: var(--display); font-weight: 700; font-size: 18px; }
+.table-wrap { overflow-x: auto; margin-top: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 400; }
+td.pp { font-family: var(--mono); color: var(--blue); }
+td.pp .ist { font-weight: 700; }
+
+@keyframes pop { from { transform: translateY(4px); opacity: .4; } to { transform: none; opacity: 1; } }
+.fresh { animation: pop .18s ease-out; }
+@media (prefers-reduced-motion: reduce) { .fresh { animation: none; } }
+@media (max-width: 460px) {
+  .choices:not(.aux-choices) { grid-template-columns: 1fr; }
+  .stats { gap: 12px; }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Partizip <span>II</span> Trainer</h1>
+      <p class="sub" id="sub">32 Verben · Infinitiv → Perfekt mit <i>hat</i> oder <i>ist</i></p>
+    </div>
+    <div class="stats" aria-live="polite">
+      <span>richtig <b id="st-ok">0</b>/<b id="st-all">0</b></span>
+      <span>Serie <b id="st-streak">0</b></span>
+      <span>beste <b id="st-best">0</b></span>
+    </div>
+  </header>
+
+  <div class="listbar">
+    <label for="list-select">Liste</label>
+    <select id="list-select"></select>
+    <button class="btn ghost small" id="list-edit" type="button">Bearbeiten</button>
+    <button class="btn ghost small" id="list-new" type="button">+ Neue Liste</button>
+    <label for="lang-select">Übersetzung</label>
+    <select id="lang-select"></select>
+    <div class="sync" id="sync"></div>
+  </div>
+
+  <section class="sheet editor" id="editor" hidden aria-labelledby="ed-title">
+    <div class="prompt-label" id="ed-title">Neue Liste</div>
+    <label class="field">
+      <span>Name</span>
+      <input id="ed-name" type="text" maxlength="60" placeholder="z. B. Lektion 7" autocomplete="off">
+    </label>
+    <label class="field">
+      <span>Ein Verb pro Zeile: <code>Infinitiv; hat/ist Partizip; Übersetzung</code> · Übersetzung ist optional, Tab oder <code>|</code> gehen auch</span>
+      <textarea id="ed-text" rows="10" spellcheck="false" placeholder="trinken; hat getrunken; пить&#10;fahren; ist gefahren; ехать&#10;mitkommen; ist mitgekommen; идти вместе"></textarea>
+    </label>
+    <div class="ed-check" id="ed-check" aria-live="polite"></div>
+    <div class="ed-actions">
+      <button class="btn" id="ed-save" type="button">Speichern</button>
+      <button class="btn ghost" id="ed-cancel" type="button">Abbrechen</button>
+      <button class="btn ghost small" id="ed-copy" type="button">Grundliste einfügen</button>
+      <span class="spacer"></span>
+      <span id="ed-del-area"></span>
+    </div>
+  </section>
+
+  <nav class="tabs" role="tablist" aria-label="Spielmodus" id="tabs">
+    <button class="tab" role="tab" id="tab-type" data-mode="type">1 · Tippen</button>
+    <button class="tab" role="tab" id="tab-aux" data-mode="aux">2 · hat oder ist?</button>
+    <button class="tab" role="tab" id="tab-mc" data-mode="mc">3 · Auswahl</button>
+  </nav>
+
+  <main class="sheet" id="sheet" aria-live="polite"></main>
+
+  <section>
+    <h2>Fortschritt</h2>
+    <div class="legend">
+      neu <i style="background:var(--l0)"></i><i style="background:var(--l1)"></i><i style="background:var(--l2)"></i><i style="background:var(--l3)"></i><i style="background:var(--l4)"></i> sicher
+      · Fehler kommen öfter dran
+    </div>
+    <div class="mastery" id="mastery"></div>
+    <div id="reset-area"></div>
+  </section>
+
+  <details>
+    <summary>Wortliste</summary>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Infinitiv</th><th>Perfekt</th><th>Übersetzung</th></tr></thead>
+        <tbody id="list"></tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+<script>
+// Translation languages, ordered by total speakers (native + second language). Russian lives in BASE_VERBS itself.
+const LANGS = [
+  ["en", "English"], ["zh", "中文"], ["hi", "हिन्दी"], ["es", "Español"], ["ar", "العربية"],
+  ["fr", "Français"], ["bn", "বাংলা"], ["pt", "Português"], ["ru", "Русский"], ["id", "Bahasa Indonesia"],
+  ["ur", "اردو"], ["ja", "日本語"], ["tr", "Türkçe"], ["vi", "Tiếng Việt"], ["ko", "한국어"],
+  ["fa", "فارسی"], ["sw", "Kiswahili"], ["tl", "Tagalog"], ["it", "Italiano"], ["pl", "Polski"], ["uk", "Українська"],
+];
+
+// One entry per built-in verb, in the same order as BASE_VERBS (backen … fliegen).
+const TRANSLATIONS = {
+  en: ["to bake","to begin","to bring","to think","to eat","to find","to give","to have","to help","to invite","to read","to take","to call (phone)","to sleep","to write","to see","to be","to send","to sing","to speak","to carry, to wear","to meet","to drink","to forget","to lose","to wash","to know (a fact)","to understand","to move (house)","to stay","to go (by vehicle), to drive","to fly"],
+  zh: ["烤","开始","带来","想","吃","找到","给","有","帮助","邀请","读","拿","打电话","睡觉","写","看见","是","寄，发送","唱歌","说","提，搬；穿戴","遇见，碰面","喝","忘记","丢失","洗","知道","明白，理解","搬家","留下，停留","（乘车）去；开车","飞"],
+  hi: ["बेक करना","शुरू करना","लाना","सोचना","खाना","पाना, ढूँढ लेना","देना","के पास होना","मदद करना","आमंत्रित करना","पढ़ना","लेना","फ़ोन करना","सोना","लिखना","देखना","होना","भेजना","गाना","बोलना","उठाकर ले जाना; पहनना","मिलना","पीना","भूलना","खोना","धोना","जानना","समझना","घर बदलना","रुकना, रहना","(वाहन से) जाना; चलाना","उड़ना"],
+  es: ["hornear","empezar","traer","pensar","comer","encontrar","dar","tener","ayudar","invitar","leer","tomar, coger","llamar (por teléfono)","dormir","escribir","ver","ser, estar","enviar","cantar","hablar","llevar (cargar, vestir)","encontrarse con","beber","olvidar","perder","lavar","saber","entender","mudarse","quedarse","ir (en vehículo), conducir","volar"],
+  ar: ["يخبز","يبدأ","يُحضِر","يفكّر","يأكل","يجد","يعطي","يملك","يساعد","يدعو","يقرأ","يأخذ","يتّصل هاتفيًا","ينام","يكتب","يرى","يكون","يرسل","يغنّي","يتكلّم","يحمل؛ يرتدي","يقابل","يشرب","ينسى","يفقد","يغسل","يعرف","يفهم","ينتقل إلى سكن جديد","يبقى","يسافر بمركبة؛ يقود","يطير"],
+  fr: ["cuire (au four)","commencer","apporter","penser","manger","trouver","donner","avoir","aider","inviter","lire","prendre","appeler (téléphoner)","dormir","écrire","voir","être","envoyer","chanter","parler","porter","rencontrer","boire","oublier","perdre","laver","savoir","comprendre","déménager","rester","aller (en véhicule), conduire","voler (en avion)"],
+  bn: ["বেক করা","শুরু করা","আনা","ভাবা","খাওয়া","খুঁজে পাওয়া","দেওয়া","কাছে থাকা","সাহায্য করা","নিমন্ত্রণ করা","পড়া","নেওয়া","ফোন করা","ঘুমানো","লেখা","দেখা","হওয়া","পাঠানো","গান গাওয়া","বলা","বহন করা; পরা","দেখা করা","পান করা","ভুলে যাওয়া","হারানো","ধোয়া","জানা","বোঝা","বাসা বদলানো","থেকে যাওয়া","(গাড়িতে) যাওয়া; চালানো","ওড়া"],
+  pt: ["assar","começar","trazer","pensar","comer","encontrar","dar","ter","ajudar","convidar","ler","pegar, tomar","ligar (telefonar)","dormir","escrever","ver","ser, estar","enviar","cantar","falar","carregar; vestir","encontrar-se com","beber","esquecer","perder","lavar","saber","entender","mudar-se","ficar","ir (de veículo), dirigir","voar"],
+  id: ["memanggang","mulai","membawa","berpikir","makan","menemukan","memberi","punya, memiliki","membantu","mengundang","membaca","mengambil","menelepon","tidur","menulis","melihat","adalah, menjadi","mengirim","bernyanyi","berbicara","membawa; memakai","bertemu","minum","lupa","kehilangan","mencuci","tahu","mengerti","pindah rumah","tinggal, tetap","pergi (naik kendaraan); menyetir","terbang"],
+  ur: ["بیک کرنا","شروع کرنا","لانا","سوچنا","کھانا","پانا، ڈھونڈ لینا","دینا","کے پاس ہونا","مدد کرنا","دعوت دینا","پڑھنا","لینا","فون کرنا","سونا","لکھنا","دیکھنا","ہونا","بھیجنا","گانا","بولنا","اٹھانا؛ پہننا","ملنا","پینا","بھولنا","کھونا","دھونا","جاننا","سمجھنا","گھر بدلنا","رکنا، رہنا","(گاڑی سے) جانا؛ چلانا","اڑنا"],
+  ja: ["（オーブンで）焼く","始める","持ってくる","考える","食べる","見つける","与える、あげる","持っている","手伝う","招待する","読む","取る","電話する","寝る","書く","見る","～である、いる","送る","歌う","話す","運ぶ；身につける","会う","飲む","忘れる","なくす","洗う","知っている","理解する","引っ越す","とどまる","（乗り物で）行く；運転する","飛ぶ"],
+  tr: ["(fırında) pişirmek","başlamak","getirmek","düşünmek","yemek","bulmak","vermek","sahip olmak","yardım etmek","davet etmek","okumak","almak","(telefonla) aramak","uyumak","yazmak","görmek","olmak","göndermek","şarkı söylemek","konuşmak","taşımak; giymek","buluşmak","içmek","unutmak","kaybetmek","yıkamak","bilmek","anlamak","taşınmak","kalmak","(araçla) gitmek; sürmek","uçmak"],
+  vi: ["nướng","bắt đầu","mang đến","nghĩ","ăn","tìm thấy","cho","có","giúp đỡ","mời","đọc","lấy","gọi điện","ngủ","viết","nhìn thấy","là","gửi","hát","nói","mang; mặc","gặp","uống","quên","đánh mất","rửa, giặt","biết","hiểu","chuyển nhà","ở lại","đi (bằng xe); lái xe","bay"],
+  ko: ["굽다","시작하다","가져오다","생각하다","먹다","찾다","주다","가지다","돕다","초대하다","읽다","잡다, 가져가다","전화하다","자다","쓰다","보다","이다, 있다","보내다","노래하다","말하다","나르다; 입다","만나다","마시다","잊다","잃어버리다","씻다, 빨다","알다","이해하다","이사하다","머무르다","(차로) 가다; 운전하다","날다"],
+  fa: ["پختن (در فر)","شروع کردن","آوردن","فکر کردن","خوردن","پیدا کردن","دادن","داشتن","کمک کردن","دعوت کردن","خواندن","گرفتن، برداشتن","تلفن زدن","خوابیدن","نوشتن","دیدن","بودن","فرستادن","آواز خواندن","صحبت کردن","حمل کردن؛ پوشیدن","ملاقات کردن","نوشیدن","فراموش کردن","گم کردن","شستن","دانستن","فهمیدن","اسباب‌کشی کردن","ماندن","(با وسیله نقلیه) رفتن؛ رانندگی کردن","پرواز کردن"],
+  sw: ["kuoka","kuanza","kuleta","kufikiri","kula","kupata","kutoa, kupa","kuwa na","kusaidia","kualika","kusoma","kuchukua","kupiga simu","kulala","kuandika","kuona","kuwa","kutuma","kuimba","kuzungumza","kubeba; kuvaa","kukutana","kunywa","kusahau","kupoteza","kuosha, kufua","kujua","kuelewa","kuhama","kubaki","kusafiri (kwa gari); kuendesha","kuruka (kwa ndege)"],
+  tl: ["maghurno","magsimula","magdala","mag-isip","kumain","makahanap","magbigay","magkaroon","tumulong","mag-imbita","magbasa","kumuha","tumawag (sa telepono)","matulog","sumulat","makita","maging","magpadala","kumanta","magsalita","magbuhat; magsuot","makipagkita","uminom","makalimot","mawalan","maghugas, maglaba","malaman","maintindihan","lumipat ng bahay","manatili","bumiyahe (sakay ng sasakyan); magmaneho","lumipad"],
+  it: ["cuocere al forno","cominciare","portare","pensare","mangiare","trovare","dare","avere","aiutare","invitare","leggere","prendere","telefonare","dormire","scrivere","vedere","essere","inviare","cantare","parlare","portare; indossare","incontrare","bere","dimenticare","perdere","lavare","sapere","capire","traslocare","rimanere","andare (in veicolo), guidare","volare"],
+  pl: ["piec","zaczynać","przynosić","myśleć","jeść","znajdować","dawać","mieć","pomagać","zapraszać","czytać","brać","dzwonić","spać","pisać","widzieć","być","wysyłać","śpiewać","mówić","nosić","spotykać","pić","zapominać","gubić, tracić","myć, prać","wiedzieć","rozumieć","przeprowadzać się","zostawać","jechać","lecieć"],
+  uk: ["пекти","починати","приносити","думати","їсти","знаходити","давати","мати","допомагати","запрошувати","читати","брати","дзвонити","спати","писати","бачити","бути","надсилати","співати","говорити","носити","зустрічати","пити","забувати","губити","мити, прати","знати","розуміти","переїжджати","залишатися","їхати","летіти"],
+};
+
+// Built-in list: [infinitive, aux, participle, translation, [two wrong participles], extra note]
+const BASE_VERBS = [
+  ["backen","hat","gebacken","печь",["gebackt","gebucken"]],
+  ["beginnen","hat","begonnen","начинать",["gebeginnt","begannen"]],
+  ["bringen","hat","gebracht","приносить",["gebringt","gebrungen"]],
+  ["denken","hat","gedacht","думать",["gedenkt","gedunken"]],
+  ["essen","hat","gegessen","есть (кушать)",["geesst","geessen"]],
+  ["finden","hat","gefunden","находить",["gefindet","gefanden"]],
+  ["geben","hat","gegeben","давать",["gegebt","gegiben"]],
+  ["haben","hat","gehabt","иметь",["gehaben","gehatten"],"Präteritum: hatte"],
+  ["helfen","hat","geholfen","помогать",["gehelft","gehalfen"]],
+  ["einladen","hat","eingeladen","приглашать",["eingeladet","geeinladen"]],
+  ["lesen","hat","gelesen","читать",["gelest","gelasen"]],
+  ["nehmen","hat","genommen","брать",["genehmt","genahmen"]],
+  ["anrufen","hat","angerufen","звонить",["angeruft","geanrufen"]],
+  ["schlafen","hat","geschlafen","спать",["geschlaft","geschliefen"]],
+  ["schreiben","hat","geschrieben","писать",["geschreibt","geschreiben"]],
+  ["sehen","hat","gesehen","видеть",["geseht","gesahen"]],
+  ["sein","ist","gewesen","быть",["geseint","gewest"],"Präteritum: war"],
+  ["senden","hat","gesendet","посылать, отправлять",["gesend","gesondet"]],
+  ["singen","hat","gesungen","петь",["gesingt","gesangen"]],
+  ["sprechen","hat","gesprochen","говорить",["gesprecht","gesprachen"]],
+  ["tragen","hat","getragen","носить",["getragt","getrugen"]],
+  ["treffen","hat","getroffen","встречать",["getrefft","getraffen"]],
+  ["trinken","hat","getrunken","пить",["getrinkt","getranken"]],
+  ["vergessen","hat","vergessen","забывать",["vergesst","gevergessen"]],
+  ["verlieren","hat","verloren","терять",["verliert","geverloren"]],
+  ["waschen","hat","gewaschen","мыть, стирать",["gewascht","gewuschen"]],
+  ["wissen","hat","gewusst","знать",["gewisst","gewissen"]],
+  ["verstehen","hat","verstanden","понимать",["verstehte","geverstanden"]],
+  ["umziehen","ist","umgezogen","переезжать",["umgezieht","geumzogen"]],
+  ["bleiben","ist","geblieben","оставаться",["gebleibt","gebleiben"]],
+  ["fahren","ist","gefahren","ехать",["gefahrt","gefuhren"]],
+  ["fliegen","ist","geflogen","лететь",["gefliegt","geflegen"]],
+].map(([inf, aux, pp, tr, fakes, extra], i) => {
+  const v = makeVerb(inf, aux, pp, tr, fakes, extra);
+  v.trs = { ru: tr };
+  for (const [code, words] of Object.entries(TRANSLATIONS)) v.trs[code] = words[i];
+  return v;
+});
+
+function makeVerb(inf, aux, pp, tr, fakes, extra) {
+  return { inf, aux, pp, tr: tr || "", fakes: fakes || fakesFor(pp), extra, full: aux + " " + pp };
+}
+
+// Plausible wrong participles for custom verbs: weak/strong ending swap, stem vowel swap, ge- prefix toggle.
+function fakesFor(pp) {
+  const out = new Set();
+  if (/en$/.test(pp)) out.add(pp.replace(/en$/, "t"));
+  else if (/t$/.test(pp)) out.add(pp.replace(/t$/, "en"));
+  const start = pp.startsWith("ge") ? 2 : 0;
+  for (const [a, b] of [["ie", "ei"], ["o", "a"], ["u", "a"], ["a", "u"], ["e", "i"], ["i", "a"]]) {
+    const i = pp.indexOf(a, start);
+    if (i >= 0 && i < pp.length - 2) { out.add(pp.slice(0, i) + b + pp.slice(i + a.length)); break; }
+  }
+  out.add(pp.startsWith("ge") ? pp.slice(2) : "ge" + pp);
+  out.delete(pp);
+  return [...out].filter(Boolean);
+}
+
+// One verb per line: "Infinitiv; hat/ist Partizip; Übersetzung". Separators ; | or tab. Blank lines and # comments are skipped.
+function parseList(text) {
+  const verbs = [], errors = [], seen = new Set();
+  String(text || "").split(/\r?\n/).forEach((raw, i) => {
+    const line = raw.trim();
+    if (!line || line.startsWith("#")) return;
+    const parts = line.split(/\s*(?:;|\||\t)\s*/);
+    const inf = parts[0];
+    const m = (parts[1] || "").match(/^(hat|ist)\s+(\S.*)$/i);
+    if (!inf || !m) { errors.push(`Zeile ${i + 1}: „${line}“ — erwartet z. B. trinken; hat getrunken; пить`); return; }
+    if (seen.has(inf.toLowerCase())) { errors.push(`Zeile ${i + 1}: „${inf}“ steht schon in der Liste`); return; }
+    seen.add(inf.toLowerCase());
+    verbs.push(makeVerb(inf, m[1].toLowerCase(), m[2].trim(), parts.slice(2).join("; ")));
+  });
+  return { verbs, errors };
+}
+
+const BASE_LIST = { id: "base", name: "Verbformen 1–32 (Grundliste)", verbs: BASE_VERBS };
+const baseText = () => BASE_VERBS.map(v => `${v.inf}; ${v.full}; ${v.trs[state.lang] || v.tr}`).join("\n");
+
+/* ---------- Per-browser settings and progress ---------- */
+const MAX_LVL = 4;
+const STORE_KEY = "partizip-trainer-v1";
+const CACHE_KEY = "partizip-lists-cache";   // last copy of the saved lists, for the first frame
+const LOCAL_KEY = "partizip-lists-local";   // lists when no shared store is available (e.g. the local file)
+let state = { lvl: {}, best: 0, mode: "type", list: "base" };
+try { const s = JSON.parse(localStorage.getItem(STORE_KEY)); if (s && s.lvl) state = { ...state, ...s }; } catch (e) {}
+const save = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {} };
+const readLS = k => { try { return JSON.parse(localStorage.getItem(k)) || null; } catch (e) { return null; } };
+const writeLS = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+
+// Translation language: saved choice, else the browser's language, else English. "none" hides translations.
+if (!state.lang) {
+  const codes = LANGS.map(l => l[0]);
+  state.lang = (navigator.languages || [navigator.language || ""]).map(l => l.slice(0, 2).toLowerCase())
+    .map(l => l === "fil" ? "tl" : l).find(l => codes.includes(l)) || "en";
+}
+// Built-in verbs carry every language; custom-list verbs have their own single translation.
+const trOf = v => v.trs ? (state.lang === "none" ? "" : v.trs[state.lang] || "") : v.tr;
+
+// Progress is kept per list; the built-in list keeps its old keys.
+const lvlKey = v => (state.list === "base" ? "" : state.list + ":") + v.inf;
+const lvlOf = v => state.lvl[lvlKey(v)] || 0;
+
+/* ---------- Word lists ---------- */
+let customLists = readLS(CACHE_KEY) || [];   // [{id, name, text}]
+let listsSettled = false;                    // true once the store (or local storage) has answered
+let storage = "pending";                     // "pending" | "db" | "local"
+
+const allLists = () => [BASE_LIST, ...customLists.map(l => ({ ...l, verbs: parseList(l.text).verbs }))];
+const activeList = () => allLists().find(l => l.id === state.list) || BASE_LIST;
+let VERBS = activeList().verbs;
+let activeSig = "";
+
+const dbP = (async () => {
+  try { return window.claude?.use ? await window.claude.use("db") : null; } catch (e) { return null; }
+})();
+
+dbP.then(db => {
+  if (!db) {
+    storage = "local";
+    customLists = readLS(LOCAL_KEY) || [];
+    listsSettled = true;
+    setSync("Eigene Listen werden nur in diesem Browser gespeichert.");
+    refreshLists();
+    return;
+  }
+  storage = "db";
+  const slow = setTimeout(() => setSync("Eigene Listen werden noch geladen …"), 10000);
+  db.collection("lists").onSnapshot(snap => {
+    customLists = snap.docs.map(d => ({ id: d.id, name: String(d.data().name || "Ohne Namen"), text: String(d.data().text || "") }))
+      .sort((a, b) => a.name.localeCompare(b.name, "de"));
+    if (!snap.metadata.fromCache) { listsSettled = true; clearTimeout(slow); setSync(""); }
+    writeLS(CACHE_KEY, customLists);
+    refreshLists();
+  }, () => {
+    clearTimeout(slow); listsSettled = true;
+    setSync("Eigene Listen konnten nicht geladen werden. Die Grundliste funktioniert weiter.");
+    refreshLists();
+  });
+});
+
+function setSync(msg) { $("sync").textContent = msg; }
+
+// Rebuild the picker; restart the game only if the active list itself changed.
+function refreshLists() {
+  if (listsSettled && state.list !== "base" && !customLists.some(l => l.id === state.list)) { state.list = "base"; save(); }
+  const lists = allLists();
+  $("list-select").innerHTML = lists.map(l =>
+    `<option value="${esc(l.id)}"${l.id === state.list ? " selected" : ""}>${esc(l.name)} (${l.verbs.length})</option>`).join("");
+  $("list-edit").disabled = state.list === "base";
+  const al = activeList();
+  const sig = al.id + "\n" + (al.text ?? "");
+  if (sig !== activeSig) {
+    activeSig = sig; VERBS = al.verbs; last = null;
+    $("sub").innerHTML = `${VERBS.length} Verben · Infinitiv → Perfekt mit <i>hat</i> oder <i>ist</i>`;
+    renderList(); renderMastery(); renderReset();
+    if ($("editor").hidden) next();
+  }
+}
+
+$("list-select").addEventListener("change", e => { state.list = e.target.value; save(); refreshLists(); });
+
+/* ---------- List editor ---------- */
+let editingId = null;
+function openEditor(list) {
+  editingId = list ? list.id : null;
+  $("ed-title").textContent = list ? "Liste bearbeiten" : "Neue Liste";
+  $("ed-name").value = list ? list.name : "";
+  $("ed-text").value = list ? list.text : "";
+  $("ed-del-area").innerHTML = list ? `<button class="reset" id="ed-del" type="button" style="margin:0">Liste löschen</button>` : "";
+  if (list) $("ed-del").addEventListener("click", askDelete);
+  $("editor").hidden = false; $("sheet").hidden = true; $("tabs").hidden = true;
+  clearTimeout(timer); locked = true;
+  checkEditor();
+  (list ? $("ed-text") : $("ed-name")).focus();
+}
+function closeEditor() {
+  $("editor").hidden = true; $("sheet").hidden = false; $("tabs").hidden = false;
+  editingId = null; next();
+}
+function checkEditor() {
+  const { verbs, errors } = parseList($("ed-text").value);
+  const ist = verbs.filter(v => v.aux === "ist").length;
+  $("ed-check").innerHTML =
+    (verbs.length ? `<span class="ok">${verbs.length} Verben erkannt (${verbs.length - ist} mit hat, ${ist} mit ist)</span>` : `<span>Noch keine Verben erkannt.</span>`) +
+    errors.slice(0, 6).map(e => `<span class="err">${esc(e)}</span>`).join("") +
+    (errors.length > 6 ? `<span class="err">… und ${errors.length - 6} weitere</span>` : "");
+  $("ed-save").disabled = !verbs.length;
+  return { verbs, errors };
+}
+$("ed-text").addEventListener("input", checkEditor);
+$("list-new").addEventListener("click", () => openEditor(null));
+$("list-edit").addEventListener("click", () => { const l = customLists.find(x => x.id === state.list); if (l) openEditor(l); });
+$("ed-cancel").addEventListener("click", closeEditor);
+$("ed-copy").addEventListener("click", () => {
+  const t = $("ed-text");
+  t.value = (t.value.trim() ? t.value.trimEnd() + "\n" : "") + baseText();
+  checkEditor(); t.focus();
+});
+
+$("ed-save").addEventListener("click", async () => {
+  const { verbs } = checkEditor();
+  if (!verbs.length) return;
+  const name = $("ed-name").value.trim() || "Meine Liste";
+  const text = $("ed-text").value;
+  const btn = $("ed-save"); btn.disabled = true; btn.textContent = "Speichert …";
+  try {
+    const db = await dbP;
+    let id = editingId;
+    if (db) {
+      const ref = id ? db.collection("lists").doc(id) : db.collection("lists").doc();
+      await ref.set({ name, text, updated: Date.now() });
+      id = ref.id;
+    } else {
+      id = id || "l" + Date.now().toString(36);
+    }
+    customLists = [...customLists.filter(l => l.id !== id), { id, name, text }].sort((a, b) => a.name.localeCompare(b.name, "de"));
+    writeLS(storage === "db" ? CACHE_KEY : LOCAL_KEY, customLists);
+    state.list = id; save();
+    $("editor").hidden = true; $("sheet").hidden = false; $("tabs").hidden = false; editingId = null;
+    activeSig = ""; refreshLists();
+  } catch (e) {
+    $("ed-check").insertAdjacentHTML("beforeend",
+      `<span class="err">Speichern fehlgeschlagen${e && e.code === "quota_exceeded" ? " (Speicher voll)" : ""}. Bitte nochmal versuchen.</span>`);
+  } finally {
+    btn.textContent = "Speichern"; btn.disabled = false;
+  }
+});
+
+function askDelete() {
+  $("ed-del-area").innerHTML = `<span class="confirm" style="margin:0">Wirklich löschen?
+    <button class="btn ghost small" id="ed-del-yes" type="button">Ja, löschen</button>
+    <button class="reset" id="ed-del-no" type="button" style="margin:0">Nein</button></span>`;
+  $("ed-del-no").addEventListener("click", () => {
+    $("ed-del-area").innerHTML = `<button class="reset" id="ed-del" type="button" style="margin:0">Liste löschen</button>`;
+    $("ed-del").addEventListener("click", askDelete);
+  });
+  $("ed-del-yes").addEventListener("click", async () => {
+    const id = editingId;
+    try {
+      const db = await dbP;
+      if (db) await db.collection("lists").doc(id).delete();
+      customLists = customLists.filter(l => l.id !== id);
+      writeLS(storage === "db" ? CACHE_KEY : LOCAL_KEY, customLists);
+      for (const k of Object.keys(state.lvl)) if (k.startsWith(id + ":")) delete state.lvl[k];
+      state.list = "base"; save();
+      $("editor").hidden = true; $("sheet").hidden = false; $("tabs").hidden = false; editingId = null;
+      activeSig = ""; refreshLists();
+    } catch (e) {
+      $("ed-check").insertAdjacentHTML("beforeend", `<span class="err">Löschen fehlgeschlagen. Bitte nochmal versuchen.</span>`);
+    }
+  });
+}
+
+/* ---------- Game ---------- */
+let session = { ok: 0, all: 0, streak: 0 };
+let current = null, last = null, locked = false, timer = null;
+
+// Weighted pick: weak verbs (low level) come up far more often. In hat/ist mode, boost "ist" verbs to ~40% when the list has both.
+function pick(mode) {
+  let pool = VERBS.filter(v => v !== last);
+  if (!pool.length) pool = VERBS;
+  let weights = pool.map(v => 2 ** (MAX_LVL - lvlOf(v)));
+  if (mode === "aux") {
+    const istTotal = pool.reduce((s, v, i) => s + (v.aux === "ist" ? weights[i] : 0), 0);
+    const hatTotal = pool.reduce((s, v, i) => s + (v.aux === "hat" ? weights[i] : 0), 0);
+    if (istTotal && hatTotal) weights = pool.map((v, i) => v.aux === "ist" ? weights[i] / istTotal * 0.4 : weights[i] / hatTotal * 0.6);
+  }
+  let r = Math.random() * weights.reduce((a, b) => a + b, 0);
+  for (let i = 0; i < pool.length; i++) { r -= weights[i]; if (r <= 0) return pool[i]; }
+  return pool[pool.length - 1];
+}
+
+function record(v, correct) {
+  session.all++;
+  if (correct) {
+    session.ok++; session.streak++;
+    state.lvl[lvlKey(v)] = Math.min(MAX_LVL, lvlOf(v) + 1);
+    state.best = Math.max(state.best, session.streak);
+  } else {
+    session.streak = 0;
+    state.lvl[lvlKey(v)] = 0;
+  }
+  save(); renderStats(); renderMastery();
+}
+
+function $(id) { return document.getElementById(id); }
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+const norm = s => s.toLowerCase().replace(/ß/g, "ss").replace(/\s+/g, " ").trim();
+
+function header(v, label) {
+  return `<div><div class="prompt-label">${label}</div>
+    <div class="verb fresh">${esc(v.inf)}</div>
+    <div class="trans" dir="auto"${trOf(v) ? "" : " hidden"}>${esc(trOf(v))}</div>
+    ${v.extra ? `<div class="extra">${esc(v.extra)}</div>` : ""}</div>`;
+}
+
+function next() {
+  clearTimeout(timer); locked = false;
+  if (!VERBS.length) { $("sheet").innerHTML = `<p class="empty">Diese Liste ist leer. Über „Bearbeiten“ Verben hinzufügen.</p>`; return; }
+  current = pick(state.mode); last = current;
+  ({ type: renderType, aux: renderAux, mc: renderMc })[state.mode](current);
+}
+
+/* Mode 1: typing */
+function renderType(v) {
+  $("sheet").innerHTML = header(v, "Perfekt eintippen") + `
+    <form class="answer-row" id="type-form" autocomplete="off">
+      <input id="answer" type="text" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="hat ge…" aria-label="Perfekt-Form">
+      <button class="btn" type="submit" id="type-btn">Prüfen</button>
+    </form>
+    <div class="feedback" id="fb"></div>
+    <div class="hint">Mit <i>hat</i> oder <i>ist</i> schreiben · <kbd>Enter</kbd> prüft, <kbd>Enter</kbd> nochmal geht weiter</div>`;
+  const input = $("answer");
+  input.focus();
+  $("type-form").addEventListener("submit", e => {
+    e.preventDefault();
+    if (locked) return next();
+    const given = norm(input.value);
+    if (!given) return;
+    const parts = given.split(" ");
+    const auxGiven = parts.length > 1 ? parts[0] : null;
+    const ppGiven = parts.length > 1 ? parts.slice(1).join(" ") : parts[0];
+    const ppOk = ppGiven === norm(v.pp);
+    const auxOk = auxGiven === v.aux;
+    const fb = $("fb");
+    if (!auxGiven && ppOk) {
+      fb.className = "feedback bad";
+      fb.innerHTML = `<span>Partizip stimmt. Jetzt noch <b>hat</b> oder <b>ist</b> davor.</span>`;
+      return;
+    }
+    locked = true; input.readOnly = true; $("type-btn").textContent = "Weiter";
+    const correct = ppOk && auxOk;
+    record(v, correct);
+    if (correct) {
+      fb.className = "feedback ok";
+      fb.innerHTML = `<span>Richtig!</span><span class="sol">${esc(v.full)}</span>`;
+      timer = setTimeout(next, 900);
+    } else {
+      const why = ppOk ? `Partizip stimmt, aber es heißt <b>${v.aux}</b>.`
+        : auxOk ? "Hilfsverb stimmt, Partizip nicht." : "Richtig wäre:";
+      const sol = `<span class="${auxOk ? "" : "hit"}">${v.aux}</span> <span class="${ppOk ? "" : "hit"}">${esc(v.pp)}</span>`;
+      fb.className = "feedback bad";
+      fb.innerHTML = `<span>${why}</span><span class="sol">${sol}</span>`;
+    }
+  });
+}
+
+/* Mode 2: hat or ist */
+function renderAux(v) {
+  $("sheet").innerHTML = header(v, "Welches Hilfsverb?") + `
+    <div class="choices aux-choices">
+      <button class="choice" data-a="hat"><span class="k">H</span>hat</button>
+      <button class="choice" data-a="ist"><span class="k">I</span>ist</button>
+    </div>
+    <div class="feedback" id="fb"></div>
+    <div class="hint">Tasten <kbd>H</kbd> / <kbd>I</kbd> · <i>ist</i> meistens bei Bewegung oder Zustandsänderung, plus <i>sein</i> und <i>bleiben</i></div>`;
+  document.querySelectorAll("[data-a]").forEach(b => b.addEventListener("click", () => answerAux(b.dataset.a)));
+}
+function answerAux(a) {
+  if (locked) return;
+  locked = true;
+  const v = current, correct = a === v.aux;
+  record(v, correct);
+  document.querySelectorAll("[data-a]").forEach(b => {
+    b.disabled = true;
+    if (b.dataset.a === v.aux) b.classList.add("right");
+    else if (b.dataset.a === a) b.classList.add("wrong");
+  });
+  const fb = $("fb");
+  fb.className = "feedback " + (correct ? "ok" : "bad");
+  fb.innerHTML = `<span>${correct ? "Richtig!" : "Leider nicht."}</span><span class="sol">${esc(v.full)}</span>`;
+  timer = setTimeout(next, correct ? 800 : 2000);
+}
+
+/* Mode 3: multiple choice */
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function renderMc(v) {
+  const other = shuffle(VERBS.filter(x => x.pp !== v.pp))[0];
+  const wrongAux = (v.aux === "hat" ? "ist " : "hat ") + v.pp;
+  const fakes = [...new Set([...v.fakes.map(f => v.aux + " " + f), wrongAux, ...(other ? [other.full] : [])])].filter(f => f !== v.full);
+  const options = shuffle([v.full, ...shuffle(fakes).slice(0, 3)]);
+  $("sheet").innerHTML = header(v, "Welche Form ist richtig?") + `
+    <div class="choices">${options.map((o, i) =>
+      `<button class="choice" data-o="${esc(o)}"><span class="k">${i + 1}</span>${esc(o)}</button>`).join("")}</div>
+    <div class="feedback" id="fb"></div>
+    <div class="hint">Tasten <kbd>1</kbd>–<kbd>${options.length}</kbd></div>`;
+  document.querySelectorAll("[data-o]").forEach(b => b.addEventListener("click", () => answerMc(b.dataset.o)));
+}
+function answerMc(o) {
+  if (locked) return;
+  locked = true;
+  const v = current, correct = o === v.full;
+  record(v, correct);
+  document.querySelectorAll("[data-o]").forEach(b => {
+    b.disabled = true;
+    if (b.dataset.o === v.full) b.classList.add("right");
+    else if (b.dataset.o === o) b.classList.add("wrong");
+  });
+  const fb = $("fb");
+  fb.className = "feedback " + (correct ? "ok" : "bad");
+  fb.innerHTML = `<span>${correct ? "Richtig!" : "Leider nicht. Richtig ist:"}</span><span class="sol">${esc(v.full)}</span>`;
+  timer = setTimeout(next, correct ? 800 : 2200);
+}
+
+/* Keyboard */
+document.addEventListener("keydown", e => {
+  if (e.ctrlKey || e.metaKey || e.altKey || !$("editor").hidden) return;
+  if (["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName)) return;
+  const k = e.key.toLowerCase();
+  if (state.mode === "aux" && (k === "h" || k === "i")) answerAux(k === "h" ? "hat" : "ist");
+  else if (state.mode === "mc" && /^[1-4]$/.test(k)) { const b = document.querySelectorAll("[data-o]")[+k - 1]; if (b) answerMc(b.dataset.o); }
+  else if (locked && (k === "enter" || k === " ") && state.mode !== "type") { e.preventDefault(); next(); }
+});
+
+/* Page chrome */
+function renderStats() {
+  $("st-ok").textContent = session.ok; $("st-all").textContent = session.all;
+  $("st-streak").textContent = session.streak; $("st-best").textContent = state.best;
+}
+function renderMastery() {
+  $("mastery").innerHTML = VERBS.map(v =>
+    `<div class="chip" data-lvl="${lvlOf(v)}" title="${esc(v.full)} · Stufe ${lvlOf(v)}/${MAX_LVL}"><span>${esc(v.inf)}</span><span class="aux">${v.aux}</span></div>`).join("");
+}
+function renderList() {
+  $("list").innerHTML = VERBS.map(v =>
+    `<tr><td>${esc(v.inf)}</td><td class="pp"><span class="${v.aux === "ist" ? "ist" : ""}">${v.aux}</span> ${esc(v.pp)}</td><td dir="auto">${esc(trOf(v))}${v.extra ? ` <span class="extra">(${esc(v.extra)})</span>` : ""}</td></tr>`).join("");
+}
+function renderReset() {
+  $("reset-area").innerHTML = `<button class="reset" id="reset" type="button">Fortschritt dieser Liste zurücksetzen</button>`;
+  $("reset").addEventListener("click", () => {
+    $("reset-area").innerHTML = `<div class="confirm">Alle Verben dieser Liste auf „neu“ setzen?
+      <button class="btn ghost small" id="reset-yes" type="button">Ja, zurücksetzen</button>
+      <button class="reset" id="reset-no" type="button" style="margin:0">Abbrechen</button></div>`;
+    $("reset-yes").addEventListener("click", () => { VERBS.forEach(v => delete state.lvl[lvlKey(v)]); save(); renderMastery(); renderReset(); });
+    $("reset-no").addEventListener("click", renderReset);
+  });
+}
+function setMode(m) {
+  state.mode = m; save();
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.mode === m));
+  next();
+}
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => setMode(t.dataset.mode)));
+
+$("lang-select").innerHTML = LANGS.map(([code, name]) =>
+  `<option value="${code}"${code === state.lang ? " selected" : ""}>${esc(name)}</option>`).join("") +
+  `<option value="none"${state.lang === "none" ? " selected" : ""}>– ohne –</option>`;
+$("lang-select").addEventListener("change", e => {
+  state.lang = e.target.value; save();
+  renderList();
+  // Swap the translation on the current card without skipping the question.
+  const tr = document.querySelector("#sheet .trans");
+  if (current && tr) { tr.textContent = trOf(current); tr.hidden = !trOf(current); }
+});
+
+if (!["type", "aux", "mc"].includes(state.mode)) state.mode = "type";
+document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.mode === state.mode));
+renderStats();
+refreshLists();
+</script>
+
+</body>
+</html>
