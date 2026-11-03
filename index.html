@@ -892,7 +892,7 @@ function renderType(v) {
       fb.innerHTML = `<span>${why}</span><span class="sol">${sol}</span>`;
       $("skip-btn").hidden = false;
       $("type-hint").innerHTML = L("retry");
-      input.select();
+      input.focus(); input.setSelectionRange(input.value.length, input.value.length);
     }
   });
 }
