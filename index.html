@@ -284,7 +284,7 @@ const KEYS = ["sub","correct","streak","best","list","edit","newList","language"
   "wordList","thInf","thTr",
   "promptType","check","next","hintType","needAux","right","wrongAux","wrongPp","shouldBe",
   "promptAux","hintAux","wrong","promptMc","keys","empty",
-  "syncLocal","syncSlow","syncFail","baseName","myList"];
+  "syncLocal","syncSlow","syncFail","baseName","myList","retry"];
 
 const UI = {
   de: ["{n} Verben · Infinitiv → Perfekt mit {hat} oder {ist}","richtig","Serie","beste","Liste","Bearbeiten","+ Neue Liste","Sprache",
@@ -295,7 +295,7 @@ const UI = {
     "Wortliste","Infinitiv","Übersetzung",
     "Perfekt eintippen","Prüfen","Weiter","Mit {hat} oder {ist} schreiben · {enter} prüft, {enter} nochmal geht weiter","Partizip stimmt. Jetzt noch {hat} oder {ist} davor.","Richtig!","Partizip stimmt, aber es heißt {aux}.","Hilfsverb stimmt, Partizip nicht.","Richtig wäre:",
     "Welches Hilfsverb?","Tasten {H} / {I} · {ist} meistens bei Bewegung oder Zustandsänderung, plus sein und bleiben","Leider nicht.","Welche Form ist richtig?","Tasten {range}","Diese Liste ist leer. Über „Bearbeiten“ Verben hinzufügen.",
-    "Eigene Listen werden nur in diesem Browser gespeichert.","Eigene Listen werden noch geladen …","Eigene Listen konnten nicht geladen werden. Die Grundliste funktioniert weiter.","Verbformen 1–32 (Grundliste)","Meine Liste"],
+    "Eigene Listen werden nur in diesem Browser gespeichert.","Eigene Listen werden noch geladen …","Eigene Listen konnten nicht geladen werden. Die Grundliste funktioniert weiter.","Verbformen 1–32 (Grundliste)","Meine Liste","Korrigiere oben und drücke {enter} zum erneuten Prüfen · Esc überspringt"],
   en: ["{n} verbs · infinitive → Perfekt with {hat} or {ist}","correct","streak","best","List","Edit","+ New list","Language",
     "New list","Edit list","Name","e.g. Lesson 7","One verb per line: {fmt} · the translation is optional; tab or {bar} also work","infinitive; hat/ist participle; translation","Save","Saving …","Cancel","Insert built-in list","Delete list","Really delete?","Yes, delete",
     "{n} verbs recognised ({h} with {hat}, {i} with {ist})","No verbs recognised yet.","Line {n}: “{line}” — expected e.g. {ex}","Line {n}: “{inf}” is already in the list","… and {n} more","Saving failed. Please try again.","Deleting failed. Please try again.",
@@ -304,7 +304,7 @@ const UI = {
     "Word list","Infinitive","Translation",
     "Type the Perfekt form","Check","Next","Write it with {hat} or {ist} · {enter} checks, {enter} again moves on","The participle is right. Now add {hat} or {ist} in front.","Correct!","The participle is right, but it takes {aux}.","The auxiliary is right, the participle isn't.","The correct answer:",
     "Which auxiliary verb?","Keys {H} / {I} · {ist} is mostly used for movement or a change of state, plus sein and bleiben","Not quite.","Which form is correct?","Keys {range}","This list is empty. Add verbs with “Edit”.",
-    "Your own lists are saved only in this browser.","Your own lists are still loading …","Your own lists couldn't be loaded. The built-in list still works.","Verb forms 1–32 (built-in)","My list"],
+    "Your own lists are saved only in this browser.","Your own lists are still loading …","Your own lists couldn't be loaded. The built-in list still works.","Verb forms 1–32 (built-in)","My list","Fix it above and press {enter} to check again · Esc skips"],
   zh: ["{n} 个动词 · 不定式 → 带 {hat} 或 {ist} 的 Perfekt","答对","连对","最佳","列表","编辑","+ 新建列表","语言",
     "新建列表","编辑列表","名称","例如：第 7 课","每行一个动词：{fmt} · 翻译可省略；也可用 Tab 或 {bar} 分隔","不定式; hat/ist 过去分词; 翻译","保存","正在保存…","取消","插入基础列表","删除列表","确定删除？","是，删除",
     "已识别 {n} 个动词（{hat}：{h} 个，{ist}：{i} 个）","尚未识别出动词。","第 {n} 行：“{line}” — 应为例如 {ex}","第 {n} 行：“{inf}” 已在列表中","… 还有 {n} 条","保存失败，请重试。","删除失败，请重试。",
@@ -313,7 +313,7 @@ const UI = {
     "词汇表","不定式","翻译",
     "输入 Perfekt 形式","检查","下一个","连同 {hat} 或 {ist} 一起写 · 按 {enter} 检查，再按 {enter} 继续","分词正确。现在在前面加上 {hat} 或 {ist}。","正确！","分词正确，但助动词应为 {aux}。","助动词正确，分词不对。","正确答案：",
     "用哪个助动词？","按键 {H} / {I} · {ist} 多用于表示移动或状态变化的动词，以及 sein 和 bleiben","不对。","哪种形式正确？","按键 {range}","此列表为空。点击“编辑”添加动词。",
-    "自建列表只保存在此浏览器中。","自建列表仍在加载…","无法加载自建列表。基础列表仍可使用。","动词形式 1–32（基础）","我的列表"],
+    "自建列表只保存在此浏览器中。","自建列表仍在加载…","无法加载自建列表。基础列表仍可使用。","动词形式 1–32（基础）","我的列表","在上面改正后按 {enter} 再次检查 · Esc 跳过"],
   hi: ["{n} क्रियाएँ · मूल रूप → {hat} या {ist} के साथ Perfekt","सही","लगातार","सर्वश्रेष्ठ","सूची","बदलें","+ नई सूची","भाषा",
     "नई सूची","सूची बदलें","नाम","जैसे पाठ 7","हर पंक्ति में एक क्रिया: {fmt} · अनुवाद वैकल्पिक है; टैब या {bar} भी चलेगा","मूल रूप; hat/ist कृदंत; अनुवाद","सहेजें","सहेजा जा रहा है …","रद्द करें","मूल सूची जोड़ें","सूची हटाएँ","सच में हटाएँ?","हाँ, हटाएँ",
     "{n} क्रियाएँ पहचानी गईं ({hat} के साथ {h}, {ist} के साथ {i})","अभी तक कोई क्रिया नहीं पहचानी गई।","पंक्ति {n}: “{line}” — अपेक्षित, जैसे {ex}","पंक्ति {n}: “{inf}” पहले से सूची में है","… और {n}","सहेजा नहीं जा सका। कृपया फिर से कोशिश करें।","हटाया नहीं जा सका। कृपया फिर से कोशिश करें।",
@@ -322,7 +322,7 @@ const UI = {
     "शब्द सूची","मूल रूप","अनुवाद",
     "Perfekt रूप टाइप करें","जाँचें","आगे","{hat} या {ist} के साथ लिखें · {enter} से जाँचें, फिर {enter} से आगे बढ़ें","कृदंत सही है। अब आगे {hat} या {ist} जोड़ें।","सही!","कृदंत सही है, पर सहायक क्रिया {aux} है।","सहायक क्रिया सही है, कृदंत नहीं।","सही उत्तर:",
     "कौन-सी सहायक क्रिया?","कुंजियाँ {H} / {I} · {ist} ज़्यादातर गति या अवस्था बदलने वाली क्रियाओं के साथ, और sein व bleiben के साथ","सही नहीं।","कौन-सा रूप सही है?","कुंजियाँ {range}","यह सूची खाली है। “बदलें” से क्रियाएँ जोड़ें।",
-    "आपकी सूचियाँ केवल इसी ब्राउज़र में सहेजी जाती हैं।","आपकी सूचियाँ अभी लोड हो रही हैं …","आपकी सूचियाँ लोड नहीं हो सकीं। मूल सूची काम करती रहेगी।","क्रिया रूप 1–32 (मूल)","मेरी सूची"],
+    "आपकी सूचियाँ केवल इसी ब्राउज़र में सहेजी जाती हैं।","आपकी सूचियाँ अभी लोड हो रही हैं …","आपकी सूचियाँ लोड नहीं हो सकीं। मूल सूची काम करती रहेगी।","क्रिया रूप 1–32 (मूल)","मेरी सूची","ऊपर सुधारें और फिर से जाँचने के लिए {enter} दबाएँ · Esc छोड़ देता है"],
   es: ["{n} verbos · infinitivo → Perfekt con {hat} o {ist}","aciertos","racha","récord","Lista","Editar","+ Nueva lista","Idioma",
     "Nueva lista","Editar lista","Nombre","p. ej. Lección 7","Un verbo por línea: {fmt} · la traducción es opcional; también sirven tabulador o {bar}","infinitivo; hat/ist participio; traducción","Guardar","Guardando …","Cancelar","Insertar lista básica","Eliminar lista","¿Eliminar de verdad?","Sí, eliminar",
     "{n} verbos reconocidos ({h} con {hat}, {i} con {ist})","Aún no se reconoce ningún verbo.","Línea {n}: «{line}» — se esperaba p. ej. {ex}","Línea {n}: «{inf}» ya está en la lista","… y {n} más","No se pudo guardar. Inténtalo de nuevo.","No se pudo eliminar. Inténtalo de nuevo.",
@@ -331,7 +331,7 @@ const UI = {
     "Lista de palabras","Infinitivo","Traducción",
     "Escribe la forma Perfekt","Comprobar","Siguiente","Escríbelo con {hat} o {ist} · {enter} comprueba, {enter} otra vez continúa","El participio es correcto. Ahora añade {hat} o {ist} delante.","¡Correcto!","El participio es correcto, pero lleva {aux}.","El auxiliar es correcto, el participio no.","Lo correcto:",
     "¿Qué verbo auxiliar?","Teclas {H} / {I} · {ist} se usa sobre todo con movimiento o cambio de estado, además de sein y bleiben","No del todo.","¿Qué forma es correcta?","Teclas {range}","Esta lista está vacía. Añade verbos con «Editar».",
-    "Tus listas se guardan solo en este navegador.","Tus listas aún se están cargando …","No se pudieron cargar tus listas. La lista básica sigue funcionando.","Formas verbales 1–32 (básica)","Mi lista"],
+    "Tus listas se guardan solo en este navegador.","Tus listas aún se están cargando …","No se pudieron cargar tus listas. La lista básica sigue funcionando.","Formas verbales 1–32 (básica)","Mi lista","Corrígelo arriba y pulsa {enter} para comprobar de nuevo · Esc salta"],
   ar: ["{n} فعلًا · المصدر ← Perfekt مع {hat} أو {ist}","صحيح","متتالية","الأفضل","القائمة","تعديل","+ قائمة جديدة","اللغة",
     "قائمة جديدة","تعديل القائمة","الاسم","مثلًا: الدرس 7","فعل واحد في كل سطر: {fmt} · الترجمة اختيارية، ويمكن الفصل أيضًا بمفتاح Tab أو {bar}","المصدر; hat/ist اسم المفعول; الترجمة","حفظ","جارٍ الحفظ …","إلغاء","إدراج القائمة الأساسية","حذف القائمة","هل تريد الحذف فعلًا؟","نعم، احذف",
     "تم التعرّف على {n} فعلًا ({h} مع {hat}، {i} مع {ist})","لم يتم التعرّف على أي فعل بعد.","السطر {n}: «{line}» — المتوقع مثلًا {ex}","السطر {n}: «{inf}» موجود في القائمة بالفعل","… و{n} أخرى","تعذّر الحفظ. حاول مرة أخرى.","تعذّر الحذف. حاول مرة أخرى.",
@@ -340,7 +340,7 @@ const UI = {
     "قائمة الكلمات","المصدر","الترجمة",
     "اكتب صيغة Perfekt","تحقّق","التالي","اكتبها مع {hat} أو {ist} · {enter} للتحقق، و{enter} مرة أخرى للمتابعة","اسم المفعول صحيح. أضف الآن {hat} أو {ist} في البداية.","صحيح!","اسم المفعول صحيح، لكن الفعل المساعد هو {aux}.","الفعل المساعد صحيح، واسم المفعول خطأ.","الإجابة الصحيحة:",
     "أي فعل مساعد؟","المفتاحان {H} / {I} · يُستخدم {ist} غالبًا مع أفعال الحركة أو تغيّر الحال، ومع sein وbleiben","ليس تمامًا.","أي صيغة صحيحة؟","المفاتيح {range}","هذه القائمة فارغة. أضف أفعالًا عبر «تعديل».",
-    "قوائمك محفوظة في هذا المتصفح فقط.","ما زالت قوائمك قيد التحميل …","تعذّر تحميل قوائمك. القائمة الأساسية ما زالت تعمل.","صيغ الأفعال 1–32 (الأساسية)","قائمتي"],
+    "قوائمك محفوظة في هذا المتصفح فقط.","ما زالت قوائمك قيد التحميل …","تعذّر تحميل قوائمك. القائمة الأساسية ما زالت تعمل.","صيغ الأفعال 1–32 (الأساسية)","قائمتي","صحّح الإجابة أعلاه واضغط {enter} للتحقق مرة أخرى · Esc للتخطي"],
   fr: ["{n} verbes · infinitif → Perfekt avec {hat} ou {ist}","justes","série","record","Liste","Modifier","+ Nouvelle liste","Langue",
     "Nouvelle liste","Modifier la liste","Nom","p. ex. Leçon 7","Un verbe par ligne : {fmt} · la traduction est facultative ; tabulation ou {bar} fonctionnent aussi","infinitif; hat/ist participe; traduction","Enregistrer","Enregistrement …","Annuler","Insérer la liste de base","Supprimer la liste","Vraiment supprimer ?","Oui, supprimer",
     "{n} verbes reconnus ({h} avec {hat}, {i} avec {ist})","Aucun verbe reconnu pour l’instant.","Ligne {n} : « {line} » — attendu p. ex. {ex}","Ligne {n} : « {inf} » est déjà dans la liste","… et {n} de plus","Échec de l’enregistrement. Veuillez réessayer.","Échec de la suppression. Veuillez réessayer.",
@@ -349,7 +349,7 @@ const UI = {
     "Liste de mots","Infinitif","Traduction",
     "Écris la forme Perfekt","Vérifier","Suivant","Écris-la avec {hat} ou {ist} · {enter} vérifie, {enter} encore passe à la suite","Le participe est juste. Ajoute maintenant {hat} ou {ist} devant.","Juste !","Le participe est juste, mais il faut {aux}.","L’auxiliaire est juste, pas le participe.","La bonne réponse :",
     "Quel auxiliaire ?","Touches {H} / {I} · {ist} s’emploie surtout pour un mouvement ou un changement d’état, ainsi qu’avec sein et bleiben","Pas tout à fait.","Quelle forme est correcte ?","Touches {range}","Cette liste est vide. Ajoute des verbes avec « Modifier ».",
-    "Tes listes sont enregistrées uniquement dans ce navigateur.","Tes listes sont encore en cours de chargement …","Impossible de charger tes listes. La liste de base fonctionne toujours.","Formes verbales 1–32 (de base)","Ma liste"],
+    "Tes listes sont enregistrées uniquement dans ce navigateur.","Tes listes sont encore en cours de chargement …","Impossible de charger tes listes. La liste de base fonctionne toujours.","Formes verbales 1–32 (de base)","Ma liste","Corrige ci-dessus et appuie sur {enter} pour vérifier à nouveau · Échap passe"],
   bn: ["{n}টি ক্রিয়া · মূল রূপ → {hat} বা {ist} সহ Perfekt","সঠিক","টানা","সেরা","তালিকা","সম্পাদনা","+ নতুন তালিকা","ভাষা",
     "নতুন তালিকা","তালিকা সম্পাদনা","নাম","যেমন পাঠ ৭","প্রতি লাইনে একটি ক্রিয়া: {fmt} · অনুবাদ ঐচ্ছিক; ট্যাব বা {bar}-ও চলবে","মূল রূপ; hat/ist কৃদন্ত; অনুবাদ","সংরক্ষণ","সংরক্ষণ হচ্ছে …","বাতিল","মূল তালিকা যোগ করুন","তালিকা মুছুন","সত্যিই মুছবেন?","হ্যাঁ, মুছুন",
     "{n}টি ক্রিয়া শনাক্ত হয়েছে ({hat} সহ {h}টি, {ist} সহ {i}টি)","এখনও কোনো ক্রিয়া শনাক্ত হয়নি।","লাইন {n}: “{line}” — প্রত্যাশিত, যেমন {ex}","লাইন {n}: “{inf}” আগেই তালিকায় আছে","… এবং আরও {n}টি","সংরক্ষণ করা যায়নি। আবার চেষ্টা করুন।","মোছা যায়নি। আবার চেষ্টা করুন।",
@@ -358,7 +358,7 @@ const UI = {
     "শব্দ তালিকা","মূল রূপ","অনুবাদ",
     "Perfekt রূপটি টাইপ করুন","যাচাই","পরের","{hat} বা {ist} সহ লিখুন · {enter} যাচাই করে, আবার {enter} চাপলে এগোয়","কৃদন্ত ঠিক আছে। এবার সামনে {hat} বা {ist} যোগ করুন।","সঠিক!","কৃদন্ত ঠিক, কিন্তু সহায়ক ক্রিয়া {aux}।","সহায়ক ক্রিয়া ঠিক, কৃদন্ত নয়।","সঠিক উত্তর:",
     "কোন সহায়ক ক্রিয়া?","কী {H} / {I} · {ist} সাধারণত গতি বা অবস্থার পরিবর্তন বোঝানো ক্রিয়ায়, আর sein ও bleiben-এ","ঠিক হয়নি।","কোন রূপটি সঠিক?","কী {range}","এই তালিকা খালি। “সম্পাদনা” দিয়ে ক্রিয়া যোগ করুন।",
-    "আপনার তালিকা শুধু এই ব্রাউজারে সংরক্ষিত থাকে।","আপনার তালিকা এখনও লোড হচ্ছে …","আপনার তালিকা লোড করা যায়নি। মূল তালিকা কাজ করছে।","ক্রিয়ার রূপ ১–৩২ (মূল)","আমার তালিকা"],
+    "আপনার তালিকা শুধু এই ব্রাউজারে সংরক্ষিত থাকে।","আপনার তালিকা এখনও লোড হচ্ছে …","আপনার তালিকা লোড করা যায়নি। মূল তালিকা কাজ করছে।","ক্রিয়ার রূপ ১–৩২ (মূল)","আমার তালিকা","উপরে ঠিক করুন এবং আবার যাচাই করতে {enter} চাপুন · Esc এড়িয়ে যায়"],
   pt: ["{n} verbos · infinitivo → Perfekt com {hat} ou {ist}","acertos","sequência","recorde","Lista","Editar","+ Nova lista","Idioma",
     "Nova lista","Editar lista","Nome","ex.: Lição 7","Um verbo por linha: {fmt} · a tradução é opcional; tab ou {bar} também funcionam","infinitivo; hat/ist particípio; tradução","Salvar","Salvando …","Cancelar","Inserir lista básica","Excluir lista","Excluir mesmo?","Sim, excluir",
     "{n} verbos reconhecidos ({h} com {hat}, {i} com {ist})","Nenhum verbo reconhecido ainda.","Linha {n}: “{line}” — esperado, p. ex., {ex}","Linha {n}: “{inf}” já está na lista","… e mais {n}","Não foi possível salvar. Tente novamente.","Não foi possível excluir. Tente novamente.",
@@ -367,7 +367,7 @@ const UI = {
     "Lista de palavras","Infinitivo","Tradução",
     "Digite a forma Perfekt","Verificar","Próximo","Escreva com {hat} ou {ist} · {enter} verifica, {enter} de novo avança","O particípio está certo. Agora adicione {hat} ou {ist} antes.","Certo!","O particípio está certo, mas o auxiliar é {aux}.","O auxiliar está certo, o particípio não.","A resposta certa:",
     "Qual verbo auxiliar?","Teclas {H} / {I} · {ist} é usado principalmente com movimento ou mudança de estado, além de sein e bleiben","Não exatamente.","Qual forma está correta?","Teclas {range}","Esta lista está vazia. Adicione verbos em “Editar”.",
-    "Suas listas são salvas apenas neste navegador.","Suas listas ainda estão carregando …","Não foi possível carregar suas listas. A lista básica continua funcionando.","Formas verbais 1–32 (básica)","Minha lista"],
+    "Suas listas são salvas apenas neste navegador.","Suas listas ainda estão carregando …","Não foi possível carregar suas listas. A lista básica continua funcionando.","Formas verbais 1–32 (básica)","Minha lista","Corrija acima e pressione {enter} para verificar de novo · Esc pula"],
   ru: ["Глаголов: {n} · инфинитив → Perfekt с {hat} или {ist}","верно","серия","рекорд","Список","Изменить","+ Новый список","Язык",
     "Новый список","Изменить список","Название","напр. Урок 7","Один глагол на строку: {fmt} · перевод необязателен, можно разделять табуляцией или {bar}","инфинитив; hat/ist причастие; перевод","Сохранить","Сохранение …","Отмена","Вставить основной список","Удалить список","Точно удалить?","Да, удалить",
     "Распознано глаголов: {n} (с {hat}: {h}, с {ist}: {i})","Глаголы пока не распознаны.","Строка {n}: «{line}» — ожидается, например, {ex}","Строка {n}: «{inf}» уже есть в списке","… и ещё {n}","Не удалось сохранить. Попробуйте ещё раз.","Не удалось удалить. Попробуйте ещё раз.",
@@ -376,7 +376,7 @@ const UI = {
     "Список слов","Инфинитив","Перевод",
     "Введите форму Perfekt","Проверить","Дальше","Пишите с {hat} или {ist} · {enter} — проверить, ещё раз {enter} — дальше","Причастие верное. Теперь добавьте {hat} или {ist} в начало.","Верно!","Причастие верное, но нужен {aux}.","Вспомогательный глагол верный, причастие — нет.","Правильно:",
     "Какой вспомогательный глагол?","Клавиши {H} / {I} · {ist} обычно при движении или изменении состояния, а также у sein и bleiben","Не совсем.","Какая форма правильная?","Клавиши {range}","Этот список пуст. Добавьте глаголы через «Изменить».",
-    "Свои списки сохраняются только в этом браузере.","Свои списки ещё загружаются …","Не удалось загрузить свои списки. Основной список работает.","Формы глаголов 1–32 (основной)","Мой список"],
+    "Свои списки сохраняются только в этом браузере.","Свои списки ещё загружаются …","Не удалось загрузить свои списки. Основной список работает.","Формы глаголов 1–32 (основной)","Мой список","Исправь ответ выше и нажми {enter}, чтобы проверить снова · Esc — пропустить"],
   id: ["{n} kata kerja · infinitif → Perfekt dengan {hat} atau {ist}","benar","beruntun","terbaik","Daftar","Ubah","+ Daftar baru","Bahasa",
     "Daftar baru","Ubah daftar","Nama","mis. Pelajaran 7","Satu kata kerja per baris: {fmt} · terjemahan opsional; tab atau {bar} juga bisa","infinitif; hat/ist partisip; terjemahan","Simpan","Menyimpan …","Batal","Sisipkan daftar dasar","Hapus daftar","Yakin hapus?","Ya, hapus",
     "{n} kata kerja dikenali ({h} dengan {hat}, {i} dengan {ist})","Belum ada kata kerja yang dikenali.","Baris {n}: “{line}” — seharusnya mis. {ex}","Baris {n}: “{inf}” sudah ada di daftar","… dan {n} lainnya","Gagal menyimpan. Silakan coba lagi.","Gagal menghapus. Silakan coba lagi.",
@@ -385,7 +385,7 @@ const UI = {
     "Daftar kata","Infinitif","Terjemahan",
     "Ketik bentuk Perfekt","Periksa","Lanjut","Tulis dengan {hat} atau {ist} · {enter} memeriksa, {enter} lagi untuk lanjut","Partisipnya benar. Sekarang tambahkan {hat} atau {ist} di depan.","Benar!","Partisipnya benar, tetapi memakai {aux}.","Kata kerja bantunya benar, partisipnya belum.","Jawaban yang benar:",
     "Kata kerja bantu yang mana?","Tombol {H} / {I} · {ist} biasanya untuk gerakan atau perubahan keadaan, juga sein dan bleiben","Belum tepat.","Bentuk mana yang benar?","Tombol {range}","Daftar ini kosong. Tambahkan kata kerja lewat “Ubah”.",
-    "Daftar Anda hanya disimpan di browser ini.","Daftar Anda masih dimuat …","Daftar Anda tidak dapat dimuat. Daftar dasar tetap berfungsi.","Bentuk kata kerja 1–32 (dasar)","Daftar saya"],
+    "Daftar Anda hanya disimpan di browser ini.","Daftar Anda masih dimuat …","Daftar Anda tidak dapat dimuat. Daftar dasar tetap berfungsi.","Bentuk kata kerja 1–32 (dasar)","Daftar saya","Perbaiki di atas lalu tekan {enter} untuk memeriksa lagi · Esc melewati"],
   ur: ["{n} افعال · مصدر ← {hat} یا {ist} کے ساتھ Perfekt","درست","مسلسل","بہترین","فہرست","ترمیم","+ نئی فہرست","زبان",
     "نئی فہرست","فہرست میں ترمیم","نام","مثلاً سبق 7","ہر سطر میں ایک فعل: {fmt} · ترجمہ اختیاری ہے؛ ٹیب یا {bar} بھی چلے گا","مصدر; hat/ist اسمِ مفعول; ترجمہ","محفوظ کریں","محفوظ ہو رہا ہے …","منسوخ","بنیادی فہرست شامل کریں","فہرست حذف کریں","واقعی حذف کریں؟","ہاں، حذف کریں",
     "{n} افعال پہچانے گئے ({hat} کے ساتھ {h}، {ist} کے ساتھ {i})","ابھی تک کوئی فعل نہیں پہچانا گیا۔","سطر {n}: “{line}” — متوقع، مثلاً {ex}","سطر {n}: “{inf}” پہلے سے فہرست میں ہے","… اور {n}","محفوظ نہیں ہو سکا۔ دوبارہ کوشش کریں۔","حذف نہیں ہو سکا۔ دوبارہ کوشش کریں۔",
@@ -394,7 +394,7 @@ const UI = {
     "الفاظ کی فہرست","مصدر","ترجمہ",
     "Perfekt کی شکل ٹائپ کریں","جانچیں","آگے","{hat} یا {ist} کے ساتھ لکھیں · {enter} جانچتا ہے، دوبارہ {enter} آگے بڑھاتا ہے","اسمِ مفعول درست ہے۔ اب شروع میں {hat} یا {ist} لگائیں۔","درست!","اسمِ مفعول درست ہے، لیکن امدادی فعل {aux} ہے۔","امدادی فعل درست ہے، اسمِ مفعول نہیں۔","درست جواب:",
     "کون سا امدادی فعل؟","کلیدیں {H} / {I} · {ist} زیادہ تر حرکت یا حالت کی تبدیلی والے افعال کے ساتھ، اور sein اور bleiben کے ساتھ","درست نہیں۔","کون سی شکل درست ہے؟","کلیدیں {range}","یہ فہرست خالی ہے۔ “ترمیم” سے افعال شامل کریں۔",
-    "آپ کی فہرستیں صرف اسی براؤزر میں محفوظ ہوتی ہیں۔","آپ کی فہرستیں ابھی لوڈ ہو رہی ہیں …","آپ کی فہرستیں لوڈ نہیں ہو سکیں۔ بنیادی فہرست کام کرتی رہے گی۔","افعال کی شکلیں 1–32 (بنیادی)","میری فہرست"],
+    "آپ کی فہرستیں صرف اسی براؤزر میں محفوظ ہوتی ہیں۔","آپ کی فہرستیں ابھی لوڈ ہو رہی ہیں …","آپ کی فہرستیں لوڈ نہیں ہو سکیں۔ بنیادی فہرست کام کرتی رہے گی۔","افعال کی شکلیں 1–32 (بنیادی)","میری فہرست","اوپر درست کریں اور دوبارہ جانچنے کے لیے {enter} دبائیں · Esc چھوڑ دیتا ہے"],
   ja: ["動詞 {n} 個 · 不定詞 → {hat} または {ist} を使う Perfekt","正解","連続","最高","リスト","編集","+ 新しいリスト","言語",
     "新しいリスト","リストを編集","名前","例：第7課","1行に1つの動詞：{fmt} · 訳は省略可。タブや {bar} でも区切れます","不定詞; hat/ist 過去分詞; 訳","保存","保存中…","キャンセル","基本リストを挿入","リストを削除","本当に削除しますか？","はい、削除",
     "{n} 個の動詞を認識（{hat}：{h}、{ist}：{i}）","まだ動詞が認識されていません。","{n} 行目：「{line}」— 例：{ex} の形式で","{n} 行目：「{inf}」はすでにリストにあります","…ほか {n} 件","保存できませんでした。もう一度お試しください。","削除できませんでした。もう一度お試しください。",
@@ -403,7 +403,7 @@ const UI = {
     "単語リスト","不定詞","訳",
     "Perfekt の形を入力","確認","次へ","{hat} または {ist} を付けて書く · {enter} で確認、もう一度 {enter} で次へ","分詞は正解です。前に {hat} か {ist} を付けてください。","正解！","分詞は正解ですが、助動詞は {aux} です。","助動詞は正解ですが、分詞が違います。","正解：",
     "どちらの助動詞？","キー {H} / {I} · {ist} は主に移動や状態の変化を表す動詞と、sein・bleiben に使います","残念。","正しい形はどれ？","キー {range}","このリストは空です。「編集」から動詞を追加してください。",
-    "自分のリストはこのブラウザにのみ保存されます。","自分のリストを読み込み中…","自分のリストを読み込めませんでした。基本リストは引き続き使えます。","動詞の変化 1–32（基本）","マイリスト"],
+    "自分のリストはこのブラウザにのみ保存されます。","自分のリストを読み込み中…","自分のリストを読み込めませんでした。基本リストは引き続き使えます。","動詞の変化 1–32（基本）","マイリスト","上で直して {enter} でもう一度チェック · Esc でスキップ"],
   tr: ["{n} fiil · mastar → {hat} veya {ist} ile Perfekt","doğru","seri","rekor","Liste","Düzenle","+ Yeni liste","Dil",
     "Yeni liste","Listeyi düzenle","Ad","ör. Ders 7","Her satıra bir fiil: {fmt} · çeviri isteğe bağlıdır; sekme veya {bar} de olur","mastar; hat/ist ortaç; çeviri","Kaydet","Kaydediliyor …","İptal","Temel listeyi ekle","Listeyi sil","Gerçekten silinsin mi?","Evet, sil",
     "{n} fiil tanındı ({hat} ile {h}, {ist} ile {i})","Henüz fiil tanınmadı.","Satır {n}: “{line}” — beklenen ör. {ex}","Satır {n}: “{inf}” zaten listede","… ve {n} tane daha","Kaydedilemedi. Lütfen tekrar deneyin.","Silinemedi. Lütfen tekrar deneyin.",
@@ -412,7 +412,7 @@ const UI = {
     "Kelime listesi","Mastar","Çeviri",
     "Perfekt biçimini yazın","Kontrol et","İleri","{hat} veya {ist} ile yazın · {enter} kontrol eder, tekrar {enter} devam eder","Ortaç doğru. Şimdi başına {hat} veya {ist} ekleyin.","Doğru!","Ortaç doğru ama yardımcı fiil {aux}.","Yardımcı fiil doğru, ortaç değil.","Doğrusu:",
     "Hangi yardımcı fiil?","Tuşlar {H} / {I} · {ist} çoğunlukla hareket veya durum değişikliğinde, ayrıca sein ve bleiben ile kullanılır","Tam değil.","Hangi biçim doğru?","Tuşlar {range}","Bu liste boş. “Düzenle” ile fiil ekleyin.",
-    "Kendi listeleriniz yalnızca bu tarayıcıda saklanır.","Kendi listeleriniz hâlâ yükleniyor …","Kendi listeleriniz yüklenemedi. Temel liste çalışmaya devam ediyor.","Fiil biçimleri 1–32 (temel)","Listem"],
+    "Kendi listeleriniz yalnızca bu tarayıcıda saklanır.","Kendi listeleriniz hâlâ yükleniyor …","Kendi listeleriniz yüklenemedi. Temel liste çalışmaya devam ediyor.","Fiil biçimleri 1–32 (temel)","Listem","Yukarıda düzelt ve tekrar kontrol için {enter} bas · Esc atlar"],
   vi: ["{n} động từ · nguyên mẫu → Perfekt với {hat} hoặc {ist}","đúng","chuỗi","cao nhất","Danh sách","Sửa","+ Danh sách mới","Ngôn ngữ",
     "Danh sách mới","Sửa danh sách","Tên","vd. Bài 7","Mỗi dòng một động từ: {fmt} · bản dịch không bắt buộc; dùng tab hoặc {bar} cũng được","nguyên mẫu; hat/ist phân từ; bản dịch","Lưu","Đang lưu …","Hủy","Chèn danh sách cơ bản","Xóa danh sách","Chắc chắn xóa?","Có, xóa",
     "Nhận ra {n} động từ ({h} với {hat}, {i} với {ist})","Chưa nhận ra động từ nào.","Dòng {n}: “{line}” — cần dạng, vd. {ex}","Dòng {n}: “{inf}” đã có trong danh sách","… và {n} dòng khác","Lưu không thành công. Vui lòng thử lại.","Xóa không thành công. Vui lòng thử lại.",
@@ -421,7 +421,7 @@ const UI = {
     "Danh sách từ","Nguyên mẫu","Bản dịch",
     "Gõ dạng Perfekt","Kiểm tra","Tiếp","Viết kèm {hat} hoặc {ist} · {enter} để kiểm tra, {enter} lần nữa để tiếp tục","Phân từ đúng rồi. Giờ hãy thêm {hat} hoặc {ist} ở trước.","Đúng!","Phân từ đúng, nhưng trợ động từ là {aux}.","Trợ động từ đúng, phân từ chưa đúng.","Đáp án đúng:",
     "Trợ động từ nào?","Phím {H} / {I} · {ist} chủ yếu dùng cho chuyển động hoặc thay đổi trạng thái, và với sein, bleiben","Chưa đúng.","Dạng nào đúng?","Phím {range}","Danh sách này trống. Thêm động từ bằng “Sửa”.",
-    "Danh sách của bạn chỉ được lưu trong trình duyệt này.","Danh sách của bạn vẫn đang tải …","Không tải được danh sách của bạn. Danh sách cơ bản vẫn dùng được.","Dạng động từ 1–32 (cơ bản)","Danh sách của tôi"],
+    "Danh sách của bạn chỉ được lưu trong trình duyệt này.","Danh sách của bạn vẫn đang tải …","Không tải được danh sách của bạn. Danh sách cơ bản vẫn dùng được.","Dạng động từ 1–32 (cơ bản)","Danh sách của tôi","Sửa ở trên rồi nhấn {enter} để kiểm tra lại · Esc để bỏ qua"],
   ko: ["동사 {n}개 · 부정사 → {hat} 또는 {ist}를 쓰는 Perfekt","정답","연속","최고","목록","편집","+ 새 목록","언어",
     "새 목록","목록 편집","이름","예: 7과","한 줄에 동사 하나: {fmt} · 번역은 선택 사항이며 탭이나 {bar}로 구분해도 됩니다","부정사; hat/ist 과거분사; 번역","저장","저장 중…","취소","기본 목록 넣기","목록 삭제","정말 삭제할까요?","예, 삭제",
     "동사 {n}개 인식됨 ({hat}: {h}개, {ist}: {i}개)","아직 인식된 동사가 없습니다.","{n}번째 줄: “{line}” — 예: {ex} 형식이어야 합니다","{n}번째 줄: “{inf}”은(는) 이미 목록에 있습니다","… 외 {n}개","저장하지 못했습니다. 다시 시도해 주세요.","삭제하지 못했습니다. 다시 시도해 주세요.",
@@ -430,7 +430,7 @@ const UI = {
     "단어 목록","부정사","번역",
     "Perfekt 형태를 입력하세요","확인","다음","{hat} 또는 {ist}와 함께 쓰세요 · {enter}로 확인, 다시 {enter}로 다음","분사는 맞습니다. 이제 앞에 {hat} 또는 {ist}를 붙이세요.","정답!","분사는 맞지만 조동사는 {aux}입니다.","조동사는 맞지만 분사가 틀렸습니다.","정답:",
     "어떤 조동사일까요?","키 {H} / {I} · {ist}는 주로 이동이나 상태 변화를 나타내는 동사와 sein, bleiben에 씁니다","아쉬워요.","어느 형태가 맞을까요?","키 {range}","이 목록은 비어 있습니다. “편집”에서 동사를 추가하세요.",
-    "내 목록은 이 브라우저에만 저장됩니다.","내 목록을 불러오는 중…","내 목록을 불러오지 못했습니다. 기본 목록은 계속 사용할 수 있습니다.","동사 변화 1–32 (기본)","내 목록"],
+    "내 목록은 이 브라우저에만 저장됩니다.","내 목록을 불러오는 중…","내 목록을 불러오지 못했습니다. 기본 목록은 계속 사용할 수 있습니다.","동사 변화 1–32 (기본)","내 목록","위에서 고친 뒤 {enter}로 다시 확인 · Esc로 건너뛰기"],
   fa: ["{n} فعل · مصدر ← Perfekt با {hat} یا {ist}","درست","پشت سر هم","بهترین","فهرست","ویرایش","+ فهرست جدید","زبان",
     "فهرست جدید","ویرایش فهرست","نام","مثلاً درس ۷","در هر خط یک فعل: {fmt} · ترجمه اختیاری است؛ Tab یا {bar} هم قابل استفاده است","مصدر; hat/ist صفت مفعولی; ترجمه","ذخیره","در حال ذخیره …","لغو","افزودن فهرست پایه","حذف فهرست","واقعاً حذف شود؟","بله، حذف شود",
     "{n} فعل شناسایی شد ({h} با {hat}، {i} با {ist})","هنوز فعلی شناسایی نشده است.","خط {n}: «{line}» — مورد انتظار، مثلاً {ex}","خط {n}: «{inf}» از قبل در فهرست هست","… و {n} مورد دیگر","ذخیره نشد. لطفاً دوباره تلاش کنید.","حذف نشد. لطفاً دوباره تلاش کنید.",
@@ -439,7 +439,7 @@ const UI = {
     "فهرست واژه‌ها","مصدر","ترجمه",
     "شکل Perfekt را تایپ کنید","بررسی","بعدی","با {hat} یا {ist} بنویسید · {enter} بررسی می‌کند، {enter} دوباره ادامه می‌دهد","صفت مفعولی درست است. حالا {hat} یا {ist} را در ابتدا اضافه کنید.","درست!","صفت مفعولی درست است، اما فعل کمکی {aux} است.","فعل کمکی درست است، صفت مفعولی نه.","پاسخ درست:",
     "کدام فعل کمکی؟","کلیدهای {H} / {I} · {ist} بیشتر برای حرکت یا تغییر حالت، و نیز برای sein و bleiben به کار می‌رود","نه کاملاً.","کدام شکل درست است؟","کلیدهای {range}","این فهرست خالی است. از «ویرایش» فعل اضافه کنید.",
-    "فهرست‌های شما فقط در همین مرورگر ذخیره می‌شوند.","فهرست‌های شما هنوز در حال بارگذاری است …","فهرست‌های شما بارگذاری نشد. فهرست پایه همچنان کار می‌کند.","شکل‌های فعل ۱–۳۲ (پایه)","فهرست من"],
+    "فهرست‌های شما فقط در همین مرورگر ذخیره می‌شوند.","فهرست‌های شما هنوز در حال بارگذاری است …","فهرست‌های شما بارگذاری نشد. فهرست پایه همچنان کار می‌کند.","شکل‌های فعل ۱–۳۲ (پایه)","فهرست من","پاسخ را بالا اصلاح کنید و برای بررسی دوباره {enter} را بزنید · Esc رد می‌کند"],
   sw: ["Vitenzi {n} · kitenzi-jina → Perfekt na {hat} au {ist}","sahihi","mfululizo","bora","Orodha","Hariri","+ Orodha mpya","Lugha",
     "Orodha mpya","Hariri orodha","Jina","mf. Somo la 7","Kitenzi kimoja kwa kila mstari: {fmt} · tafsiri si lazima; tab au {bar} pia zinafaa","kitenzi; hat/ist Partizip; tafsiri","Hifadhi","Inahifadhi …","Ghairi","Weka orodha ya msingi","Futa orodha","Kweli ufute?","Ndiyo, futa",
     "Vitenzi {n} vimetambuliwa ({h} na {hat}, {i} na {ist})","Bado hakuna kitenzi kilichotambuliwa.","Mstari {n}: “{line}” — inatarajiwa mf. {ex}","Mstari {n}: “{inf}” tayari kiko kwenye orodha","… na {n} zaidi","Imeshindikana kuhifadhi. Tafadhali jaribu tena.","Imeshindikana kufuta. Tafadhali jaribu tena.",
@@ -448,7 +448,7 @@ const UI = {
     "Orodha ya maneno","Kitenzi-jina","Tafsiri",
     "Andika umbo la Perfekt","Kagua","Endelea","Andika pamoja na {hat} au {ist} · {enter} hukagua, {enter} tena huendelea","Partizip ni sahihi. Sasa ongeza {hat} au {ist} mbele.","Sahihi!","Partizip ni sahihi, lakini kitenzi saidizi ni {aux}.","Kitenzi saidizi ni sahihi, Partizip si sahihi.","Jibu sahihi:",
     "Kitenzi saidizi kipi?","Vitufe {H} / {I} · {ist} hutumika zaidi kwa mwendo au mabadiliko ya hali, pia kwa sein na bleiben","Si sahihi kabisa.","Umbo lipi ni sahihi?","Vitufe {range}","Orodha hii haina kitu. Ongeza vitenzi kupitia “Hariri”.",
-    "Orodha zako zinahifadhiwa kwenye kivinjari hiki pekee.","Orodha zako bado zinapakiwa …","Orodha zako hazikuweza kupakiwa. Orodha ya msingi bado inafanya kazi.","Maumbo ya vitenzi 1–32 (msingi)","Orodha yangu"],
+    "Orodha zako zinahifadhiwa kwenye kivinjari hiki pekee.","Orodha zako bado zinapakiwa …","Orodha zako hazikuweza kupakiwa. Orodha ya msingi bado inafanya kazi.","Maumbo ya vitenzi 1–32 (msingi)","Orodha yangu","Rekebisha hapo juu na ubonyeze {enter} kukagua tena · Esc huruka"],
   tl: ["{n} pandiwa · infinitive → Perfekt na may {hat} o {ist}","tama","sunod-sunod","pinakamataas","Listahan","I-edit","+ Bagong listahan","Wika",
     "Bagong listahan","I-edit ang listahan","Pangalan","hal. Aralin 7","Isang pandiwa bawat linya: {fmt} · opsyonal ang salin; puwede rin ang tab o {bar}","infinitive; hat/ist participle; salin","I-save","Sine-save …","Kanselahin","Ipasok ang pangunahing listahan","Burahin ang listahan","Sigurado bang buburahin?","Oo, burahin",
     "{n} pandiwa ang nakilala ({h} na may {hat}, {i} na may {ist})","Wala pang nakikilalang pandiwa.","Linya {n}: “{line}” — inaasahan, hal. {ex}","Linya {n}: nasa listahan na ang “{inf}”","… at {n} pa","Hindi na-save. Pakisubukang muli.","Hindi nabura. Pakisubukang muli.",
@@ -457,7 +457,7 @@ const UI = {
     "Listahan ng salita","Infinitive","Salin",
     "I-type ang anyong Perfekt","Suriin","Susunod","Isulat kasama ang {hat} o {ist} · {enter} para suriin, {enter} ulit para magpatuloy","Tama ang participle. Idagdag na ang {hat} o {ist} sa unahan.","Tama!","Tama ang participle, pero {aux} ang kailangan.","Tama ang auxiliary, mali ang participle.","Ang tamang sagot:",
     "Aling auxiliary verb?","Mga key {H} / {I} · ginagamit ang {ist} kadalasan sa paggalaw o pagbabago ng kalagayan, at sa sein at bleiben","Hindi pa tama.","Aling anyo ang tama?","Mga key {range}","Walang laman ang listahang ito. Magdagdag ng pandiwa sa “I-edit”.",
-    "Ang sarili mong mga listahan ay naka-save lang sa browser na ito.","Naglo-load pa ang iyong mga listahan …","Hindi ma-load ang iyong mga listahan. Gumagana pa rin ang pangunahing listahan.","Mga anyo ng pandiwa 1–32 (pangunahin)","Aking listahan"],
+    "Ang sarili mong mga listahan ay naka-save lang sa browser na ito.","Naglo-load pa ang iyong mga listahan …","Hindi ma-load ang iyong mga listahan. Gumagana pa rin ang pangunahing listahan.","Mga anyo ng pandiwa 1–32 (pangunahin)","Aking listahan","Itama sa itaas at pindutin ang {enter} para suriin muli · Esc para laktawan"],
   it: ["{n} verbi · infinito → Perfekt con {hat} o {ist}","giuste","serie","record","Lista","Modifica","+ Nuova lista","Lingua",
     "Nuova lista","Modifica lista","Nome","es. Lezione 7","Un verbo per riga: {fmt} · la traduzione è facoltativa; vanno bene anche tab o {bar}","infinito; hat/ist participio; traduzione","Salva","Salvataggio …","Annulla","Inserisci lista di base","Elimina lista","Eliminare davvero?","Sì, elimina",
     "{n} verbi riconosciuti ({h} con {hat}, {i} con {ist})","Nessun verbo riconosciuto finora.","Riga {n}: «{line}» — atteso ad es. {ex}","Riga {n}: «{inf}» è già nella lista","… e altri {n}","Salvataggio non riuscito. Riprova.","Eliminazione non riuscita. Riprova.",
@@ -466,7 +466,7 @@ const UI = {
     "Elenco parole","Infinito","Traduzione",
     "Scrivi la forma Perfekt","Controlla","Avanti","Scrivila con {hat} o {ist} · {enter} controlla, di nuovo {enter} va avanti","Il participio è giusto. Ora aggiungi {hat} o {ist} davanti.","Giusto!","Il participio è giusto, ma vuole {aux}.","L’ausiliare è giusto, il participio no.","La risposta giusta:",
     "Quale ausiliare?","Tasti {H} / {I} · {ist} si usa soprattutto con movimento o cambiamento di stato, più sein e bleiben","Non proprio.","Quale forma è giusta?","Tasti {range}","Questa lista è vuota. Aggiungi verbi con «Modifica».",
-    "Le tue liste sono salvate solo in questo browser.","Le tue liste si stanno ancora caricando …","Impossibile caricare le tue liste. La lista di base funziona comunque.","Forme verbali 1–32 (di base)","La mia lista"],
+    "Le tue liste sono salvate solo in questo browser.","Le tue liste si stanno ancora caricando …","Impossibile caricare le tue liste. La lista di base funziona comunque.","Forme verbali 1–32 (di base)","La mia lista","Correggi sopra e premi {enter} per controllare di nuovo · Esc salta"],
   pl: ["Czasowniki: {n} · bezokolicznik → Perfekt z {hat} lub {ist}","dobrze","seria","rekord","Lista","Edytuj","+ Nowa lista","Język",
     "Nowa lista","Edytuj listę","Nazwa","np. Lekcja 7","Jeden czasownik w wierszu: {fmt} · tłumaczenie jest opcjonalne, można też użyć tabulatora lub {bar}","bezokolicznik; hat/ist imiesłów; tłumaczenie","Zapisz","Zapisywanie …","Anuluj","Wstaw listę podstawową","Usuń listę","Na pewno usunąć?","Tak, usuń",
     "Rozpoznane czasowniki: {n} (z {hat}: {h}, z {ist}: {i})","Nie rozpoznano jeszcze czasowników.","Wiersz {n}: „{line}” — oczekiwano np. {ex}","Wiersz {n}: „{inf}” jest już na liście","… i jeszcze {n}","Nie udało się zapisać. Spróbuj ponownie.","Nie udało się usunąć. Spróbuj ponownie.",
@@ -475,7 +475,7 @@ const UI = {
     "Lista słów","Bezokolicznik","Tłumaczenie",
     "Wpisz formę Perfekt","Sprawdź","Dalej","Pisz z {hat} lub {ist} · {enter} sprawdza, ponowny {enter} przechodzi dalej","Imiesłów jest dobry. Teraz dodaj {hat} lub {ist} na początku.","Dobrze!","Imiesłów jest dobry, ale potrzebne jest {aux}.","Czasownik posiłkowy jest dobry, imiesłów nie.","Poprawnie:",
     "Który czasownik posiłkowy?","Klawisze {H} / {I} · {ist} zwykle przy ruchu lub zmianie stanu, a także przy sein i bleiben","Nie całkiem.","Która forma jest poprawna?","Klawisze {range}","Ta lista jest pusta. Dodaj czasowniki przez „Edytuj”.",
-    "Własne listy są zapisywane tylko w tej przeglądarce.","Własne listy wciąż się wczytują …","Nie udało się wczytać własnych list. Lista podstawowa nadal działa.","Formy czasowników 1–32 (podstawowa)","Moja lista"],
+    "Własne listy są zapisywane tylko w tej przeglądarce.","Własne listy wciąż się wczytują …","Nie udało się wczytać własnych list. Lista podstawowa nadal działa.","Formy czasowników 1–32 (podstawowa)","Moja lista","Popraw powyżej i naciśnij {enter}, aby sprawdzić ponownie · Esc pomija"],
   uk: ["Дієслів: {n} · інфінітив → Perfekt з {hat} або {ist}","правильно","серія","рекорд","Список","Редагувати","+ Новий список","Мова",
     "Новий список","Редагувати список","Назва","напр. Урок 7","Одне дієслово на рядок: {fmt} · переклад необов’язковий, можна розділяти табуляцією або {bar}","інфінітив; hat/ist дієприкметник; переклад","Зберегти","Збереження …","Скасувати","Вставити основний список","Видалити список","Справді видалити?","Так, видалити",
     "Розпізнано дієслів: {n} (з {hat}: {h}, з {ist}: {i})","Дієслова ще не розпізнано.","Рядок {n}: «{line}» — очікується, наприклад, {ex}","Рядок {n}: «{inf}» уже є у списку","… і ще {n}","Не вдалося зберегти. Спробуйте ще раз.","Не вдалося видалити. Спробуйте ще раз.",
@@ -484,7 +484,7 @@ const UI = {
     "Список слів","Інфінітив","Переклад",
     "Введіть форму Perfekt","Перевірити","Далі","Пишіть з {hat} або {ist} · {enter} — перевірити, ще раз {enter} — далі","Дієприкметник правильний. Тепер додайте {hat} або {ist} на початку.","Правильно!","Дієприкметник правильний, але потрібен {aux}.","Допоміжне дієслово правильне, дієприкметник — ні.","Правильно:",
     "Яке допоміжне дієслово?","Клавіші {H} / {I} · {ist} зазвичай при русі або зміні стану, а також у sein і bleiben","Не зовсім.","Яка форма правильна?","Клавіші {range}","Цей список порожній. Додайте дієслова через «Редагувати».",
-    "Власні списки зберігаються лише в цьому браузері.","Власні списки ще завантажуються …","Не вдалося завантажити власні списки. Основний список працює.","Форми дієслів 1–32 (основний)","Мій список"],
+    "Власні списки зберігаються лише в цьому браузері.","Власні списки ще завантажуються …","Не вдалося завантажити власні списки. Основний список працює.","Форми дієслів 1–32 (основний)","Мій список","Виправ відповідь вище й натисни {enter}, щоб перевірити знову · Esc — пропустити"],
 };
 const RTL = ["ar", "fa", "ur"];
 const HTML_VARS = { hat: "<i>hat</i>", ist: "<i>ist</i>", enter: "<kbd>Enter</kbd>", H: "<kbd>H</kbd>", I: "<kbd>I</kbd>", bar: "<code>|</code>" };
@@ -843,11 +843,16 @@ function renderType(v) {
     <form class="answer-row" id="type-form" autocomplete="off">
       <input id="answer" type="text" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="hat ge…" aria-label="Perfekt-Form">
       <button class="btn" type="submit" id="type-btn">${L("check")}</button>
+      <button class="btn ghost" type="button" id="skip-btn" hidden>${L("next")}</button>
     </form>
     <div class="feedback" id="fb"></div>
-    <div class="hint">${L("hintType")}</div>`;
+    <div class="hint" id="type-hint">${L("hintType")}</div>`;
   const input = $("answer");
   input.focus();
+  // After a wrong answer the input stays editable so the learner can type the correct form; only the first try is scored.
+  let missed = false;
+  $("skip-btn").addEventListener("click", () => next());
+  input.addEventListener("keydown", e => { if (e.key === "Escape" && missed && !locked) { e.preventDefault(); next(); } });
   $("type-form").addEventListener("submit", e => {
     e.preventDefault();
     if (locked) return next();
@@ -864,18 +869,23 @@ function renderType(v) {
       fb.innerHTML = `<span>${L("needAux", { hat: "<b>hat</b>", ist: "<b>ist</b>" })}</span>`;
       return;
     }
-    locked = true; input.readOnly = true; $("type-btn").textContent = L("next", {}, false);
     const correct = ppOk && auxOk;
-    record(v, correct);
+    if (!missed) record(v, correct);
     if (correct) {
+      locked = true; input.readOnly = true; $("type-btn").textContent = L("next", {}, false);
+      $("skip-btn").hidden = true;
       fb.className = "feedback ok";
       fb.innerHTML = `<span>${L("right")}</span><span class="sol">${esc(v.full)}</span>`;
       timer = setTimeout(next, 900);
     } else {
+      missed = true;
       const why = ppOk ? L("wrongAux", { aux: `<b>${v.aux}</b>` }) : auxOk ? L("wrongPp") : L("shouldBe");
       const sol = `<span class="${auxOk ? "" : "hit"}">${v.aux}</span> <span class="${ppOk ? "" : "hit"}">${esc(v.pp)}</span>`;
       fb.className = "feedback bad";
       fb.innerHTML = `<span>${why}</span><span class="sol">${sol}</span>`;
+      $("skip-btn").hidden = false;
+      $("type-hint").innerHTML = L("retry");
+      input.select();
     }
   });
 }
