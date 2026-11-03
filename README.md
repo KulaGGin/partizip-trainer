@@ -14,7 +14,7 @@ Verbs you get wrong come up more often. Progress is saved in your browser.
 
 ## Word lists
 
-The built-in list has 32 common strong verbs. Add your own lists with **+ Neue Liste**, one verb per line:
+The built-in list has all 39 verbs from the course handout. Add your own lists with **+ Neue Liste**, one verb per line:
 
 ```
 trinken; hat getrunken; to drink
