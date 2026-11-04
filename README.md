@@ -9,12 +9,14 @@ A small browser game for practising irregular German verbs: the infinitive and i
 1. **Tippen:** type the Perfekt form (`trinken` → `hat getrunken`).
 2. **hat oder ist?:** pick the auxiliary verb (keys H / I).
 3. **Auswahl:** choose the correct form out of four (keys 1–4).
+4. **Bedeutung:** see the German verb and choose its meaning out of four (keys 1–4). Wrong options often look alike, such as *mitbringen* and *mitnehmen*.
+5. **Übersetzen:** see the meaning and type the German infinitive.
 
-Verbs you get wrong come up more often. Progress is saved in your browser.
+Verbs you get wrong come up more often. Progress is saved in your browser. Modes 4 and 5 keep their own progress, separate from the Perfekt modes.
 
 ## Word lists
 
-The built-in list has all 39 verbs from the course handout. Add your own lists with **+ Neue Liste**, one verb per line:
+There are two built-in lists: all 39 verbs from the course handout, and 69 prefix verbs from the course book up to page 180 (44 separable like *mitbringen*, 25 inseparable like *bezahlen*), each with its Präsens form. Add your own lists with **+ Neue Liste**, one verb per line:
 
 ```
 trinken; hat getrunken; to drink
